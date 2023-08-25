@@ -8,9 +8,7 @@ public class Lesson {
         System.out.print("Enter lesson number (from 1 to 10): ");
         int lessonNumber = Integer.parseInt(reader.readLine());
 
-        int[] times = { 585, 635, 695, 745, 805, 855, 915, 965, 1025, 1075 };
-
-        int totalMinutes = times[lessonNumber - 1];
+        int totalMinutes = 540 + lessonNumber * 45 + (5 * (lessonNumber / 2)) + (15 * ((lessonNumber - 1) / 2));
 
         int endHour = totalMinutes / 60;
         int endMinute = totalMinutes % 60;
