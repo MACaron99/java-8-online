@@ -2,11 +2,9 @@ package org.example;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Lesson {
-    public static void time(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static void time(BufferedReader reader) throws IOException {
         System.out.print("Enter lesson number (from 1 to 10): ");
         int lessonNumber = Integer.parseInt(reader.readLine());
 

@@ -2,16 +2,13 @@ package org.example;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Char {
-    public static void read(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static void read(BufferedReader reader) throws IOException {
         System.out.print("Enter the string: ");
         String inputString = reader.readLine();
 
@@ -23,7 +20,6 @@ public class Char {
             count++;
         }
 
-        reader.close();
     }
 
     public static Map<Character, Integer> countAndSortLatinCharacters(String inputString) {

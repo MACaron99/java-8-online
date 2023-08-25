@@ -2,20 +2,15 @@ package org.example;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Num {
-    public static void read(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static void read(BufferedReader reader) throws IOException {
         System.out.print("Enter the string: ");
         String inputString = reader.readLine();
-
         int totalSum = extractAndSumNumbers(inputString);
         System.out.println("Sum of numbers: " + totalSum);
-
-        reader.close();
     }
 
     public static int extractAndSumNumbers(String inputString) {
