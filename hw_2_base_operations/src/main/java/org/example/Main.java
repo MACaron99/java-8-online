@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        //Num.read(reader);
-        //Char.read(reader);
+        Num.read(reader);
+        Char.read(reader);
         Lesson.time(reader);
     }
 }
