@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 public class Char {
     public static void read(BufferedReader reader) throws IOException {
+        System.out.println("Program 2 - The number of occurrences of each character");
+        System.out.println("Description: takes a string from the console and extracts all Latin/Cyrillic characters and sorts them, indicating the number of occurrences of each character.");
         System.out.print("Enter the string: ");
         String inputString = reader.readLine();
 
