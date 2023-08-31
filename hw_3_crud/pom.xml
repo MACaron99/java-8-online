@@ -11,17 +11,8 @@
     <properties>
         <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
         <maven.shade.plugin.version>3.2.4</maven.shade.plugin.version>
-        <commons-lang3.version>3.13.0</commons-lang3.version>
         <java.version>17</java.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <finalName>finish_oop</finalName>

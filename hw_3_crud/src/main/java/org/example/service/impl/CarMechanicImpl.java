@@ -4,6 +4,8 @@ import org.example.db.CarDb;
 import org.example.entity.Car;
 import org.example.service.CarMechanic;
 
+import java.io.IOException;
+
 public class CarMechanicImpl implements CarMechanic {
 
     private CarDb carDb = new CarDb();
@@ -11,18 +13,21 @@ public class CarMechanicImpl implements CarMechanic {
     @Override
     public void create(Car car) {
         carDb.create(car);
-        System.out.println("CarMechanicImpl.create");
     }
 
     @Override
-    public void update(Car car) {}
+    public Car update(String id) throws IOException {
+        return carDb.update(id);
+    }
 
     @Override
-    public void delete(String id) {}
+    public Car[] delete(String id) throws IOException{
+        return carDb.delete(id);
+    }
 
     @Override
-    public Car findOne(String id) {
-        return null;
+    public Car findOne(String id) throws IOException{
+        return carDb.findOne(id);
     }
 
     @Override
