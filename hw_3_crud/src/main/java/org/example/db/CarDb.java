@@ -1,8 +1,6 @@
 package org.example.db;
 
 import org.example.entity.Car;
-import org.example.entity.Collection;
-import org.example.entity.CarCollection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +10,7 @@ import java.util.UUID;
 
 public class CarDb {
 
-    private Car[] cars = new Car[2];
-    private Collection[] collections = new Collection[2];
-    private CarCollection[] carCollections = new CarCollection[2];
+    private Car[] cars = new Car[2]; // чого так мало?)
     private int lastCarIndex = 0;
 
     public void create(Car car) {
@@ -52,6 +48,8 @@ public class CarDb {
 
 
     public Car update(String id) throws IOException {
+        // це потрібно робити в контроллері
+        // сюди має заходити вже готовий Car
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Please enter car brand");
         String brand = reader.readLine();
