@@ -16,13 +16,8 @@ public class CarMechanicImpl implements CarMechanic {
     }
 
     @Override
-    public Car update(String id) throws IOException {
-        return carDb.update(id);
-    }
-
-    @Override
-    public Car[] delete(String id) throws IOException{
-        return carDb.delete(id);
+    public Car[] findAll() {
+        return carDb.findAll();
     }
 
     @Override
@@ -31,7 +26,12 @@ public class CarMechanicImpl implements CarMechanic {
     }
 
     @Override
-    public Car[] findAll() {
-        return carDb.findAll();
+    public Car update(String brand, String model, int mileage) throws IOException {
+        return carDb.update(brand, model, mileage);
+    }
+
+    @Override
+    public Car[] delete() throws IOException{
+        return carDb.delete();
     }
 }

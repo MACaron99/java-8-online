@@ -2,16 +2,15 @@ package org.example.db;
 
 import org.example.entity.Car;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.UUID;
 
 public class CarDb {
 
-    private Car[] cars = new Car[2]; // чого так мало?)
+    public Car[] cars = new Car[10];
     private int lastCarIndex = 0;
+    private int k;
 
     public void create(Car car) {
         if (lastCarIndex == cars.length - 1) {
@@ -24,40 +23,17 @@ public class CarDb {
         }
     }
 
-    public Car[] findAll() {
-        return cars;
-    }
-
-    public Car findOne(String id) throws IOException {
-        int k = 0;
-        for (int i = 0; i < cars.length; i++) {
-            if (cars[i] != null) {
-                if (cars[i].getId() == id) {
-                    k = i;
-                }
-            }
-        }
-        return cars[k];
-    }
-
     private void add(Car car) {
         car.setId(UUID.randomUUID().toString());
         cars[lastCarIndex] = car;
         lastCarIndex++;
     }
 
+    public Car[] findAll() {
+        return cars;
+    }
 
-    public Car update(String id) throws IOException {
-        // це потрібно робити в контроллері
-        // сюди має заходити вже готовий Car
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please enter car brand");
-        String brand = reader.readLine();
-        System.out.println("Please enter car model");
-        String model = reader.readLine();
-        System.out.println("Please enter car mileage");
-        int mileage = Integer.parseInt(reader.readLine());
-        int k = 0;
+    public Car findOne(String id) throws IOException {
         for (int i = 0; i < cars.length; i++) {
             if (cars[i] != null) {
                 if (cars[i].getId().equalsIgnoreCase(id)) {
@@ -65,23 +41,17 @@ public class CarDb {
                 }
             }
         }
+        return cars[k];
+    }
+
+    public Car update(String brand, String model, int mileage) {
         cars[k].setCarBrand(brand);
         cars[k].setCarModel(model);
         cars[k].setCarMileage(mileage);
         return cars[k];
     }
 
-    public Car[] delete(String id) throws IOException {
-        int k = 0;
-        for (int i = 0; i < cars.length; i++) {
-            if (cars[i] != null) {
-                System.out.println(cars[i].getId().equalsIgnoreCase(id));
-                if (cars[i].getId().equalsIgnoreCase(id)) {
-                    k = i;
-                }
-            }
-        }
-        System.out.println("k = " + k);
+    public Car[] delete() throws IOException {
         Car[] a = Arrays.copyOfRange(cars, 0, k);
         Car[] b = Arrays.copyOfRange(cars, k + 1, cars.length);
         Car[] cars = Arrays.copyOf(a, a.length + b.length + 1);

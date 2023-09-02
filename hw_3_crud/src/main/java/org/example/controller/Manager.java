@@ -8,9 +8,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
+
 public class Manager {
 
-    private CarMechanic carMechanic = new CarMechanicImpl();
+    private static CarMechanic carMechanic = new CarMechanicImpl();
 
     public void start() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -40,52 +42,57 @@ public class Manager {
 
     }
 
-    private void crud(String position, BufferedReader bufferedReader) throws IOException {
+    private void crud(String position, BufferedReader reader) throws IOException {
         String id = "";
         switch (position) {
-            case "1" -> create(bufferedReader);
-            case "2" -> findAll();
+            case "1" -> {
+                System.out.println("Please enter car brand");
+                String cb = reader.readLine();
+                System.out.println("Please enter car model");
+                String cm = reader.readLine();
+                System.out.println("Please enter car mileage");
+                int carMileage = Integer.parseInt(reader.readLine());
+                Car car = new Car();
+                car.setCarBrand(cb);
+                car.setCarModel(cm);
+                car.setCarMileage(carMileage);
+                carMechanic.create(car);
+            }
+            case "2" -> {
+                Car[] cars = carMechanic.findAll();
+                for (int i = 0; i < cars.length; i++) {
+                    Car car = cars[i];
+                    if (car != null) {
+                        System.out.println("id = " + car.getId());
+                        System.out.println("car brand = " + car.getCarBrand());
+                        System.out.println("car model = " + car.getCarModel());
+                        System.out.println("car mileage = " + car.getCarMileage());
+                    }
+                }
+            }
             case "3" -> {
                 System.out.println("Please enter id if you want to update the car");
-                id = String.valueOf(bufferedReader.readLine());
+                id = String.valueOf(reader.readLine());
                 carMechanic.findOne(id);
-                carMechanic.update(id);
+                System.out.println("Please enter car brand");
+                String brand = reader.readLine();
+                System.out.println("Please enter car model");
+                String model = reader.readLine();
+                System.out.println("Please enter car mileage");
+                int mileage = Integer.parseInt(reader.readLine());
+                carMechanic.update(brand, model, mileage);
+                System.out.println("Your car was successfully updated");
             }
             case "4" -> {
                 System.out.println("Please enter id if you want to delete the car");
-                id = String.valueOf(bufferedReader.readLine());
-                carMechanic.delete(id);
+                id = String.valueOf(reader.readLine());
+                carMechanic.findOne(id);
+                carMechanic.delete();
+                System.out.println("Your car was successfully deleted");
             }
             case "5" -> {
                 System.out.print("Goodbye!");
                 System.exit(0);
-            }
-        }
-    }
-
-    private void create(BufferedReader reader) throws IOException {
-        System.out.println("Please enter car brand");
-        String cb = reader.readLine();
-        System.out.println("Please enter car model");
-        String cm = reader.readLine();
-        System.out.println("Please enter car mileage");
-        int carMileage = Integer.parseInt(reader.readLine());
-        Car car = new Car();
-        car.setCarBrand(cb);
-        car.setCarModel(cm);
-        car.setCarMileage(carMileage);
-        carMechanic.create(car);
-    }
-
-    private void findAll() {
-        Car[] cars = carMechanic.findAll();
-        for (int i = 0; i < cars.length; i++) {
-            Car car = cars[i];
-            if (car != null) {
-                System.out.println("id = " + car.getId());
-                System.out.println("car brand = " + car.getCarBrand());
-                System.out.println("car model = " + car.getCarModel());
-                System.out.println("car mileage = " + car.getCarMileage());
             }
         }
     }

@@ -8,8 +8,12 @@ import java.io.IOException;
 public interface Mechanic<MEC extends BaseEntity> {
 
     void create(MEC be);
-    Car update(String be) throws IOException;
-    Car[] delete(String id) throws IOException;
-    MEC findOne(String id) throws IOException;
+
     MEC[] findAll();
+
+    MEC findOne(String id) throws IOException;
+
+    Car update(String brand, String model, int mileage) throws IOException;
+
+    Car[] delete() throws IOException;
 }
