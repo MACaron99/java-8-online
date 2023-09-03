@@ -1,18 +1,27 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 class Object {
     private int id;
+    private List<Object> connections;
 
     public Object(int id) {
         this.id = id;
+        this.connections = new ArrayList<>();
     }
 
-    public void sendMessage(Object receiver) {
-        System.out.println("Object " + id + " sends a message to object " + receiver.id);
-        receiver.receiveMessage();
+    public int getId() {
+        return id;
     }
 
-    public void receiveMessage() {
-        System.out.println("Object " + id + " receive a message");
+    public List<Object> getConnections() {
+        return connections;
+    }
+
+    public void addConnection(Object obj) {
+        connections.add(obj);
     }
 }
