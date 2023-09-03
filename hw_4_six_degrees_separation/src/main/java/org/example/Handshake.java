@@ -29,6 +29,7 @@ public class Handshake {
             }
         }
 
+        System.out.println();
         System.out.println("Program - THEORY OF SIX HANDSHAKES");
         System.out.println("In this program, connections between 36000 objects are randomly formed so that the maximum distance between objects is 6 handshakes.");
         System.out.println("You can specify initial and the final objects between which the program needs to find the shortest path.");
