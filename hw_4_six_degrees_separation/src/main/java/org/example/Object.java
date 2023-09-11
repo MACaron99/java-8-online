@@ -3,8 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-
-class Object {
+class Object { // ну так собі назва классу))) я б не рекомендував використовувати назви для класів, якщо ці назви вже зарезервовані
     private int id;
     private List<Object> connections;
 
