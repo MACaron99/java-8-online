@@ -9,10 +9,8 @@ public class CarCollectionService {
     public CarCollection[] carCollections = new CarCollection[10];
     public int carCollectionNumber = 0;
 
-    private int lastCarCollectionIndex = 0;
-
     public void create(CarCollection carCollection) {
-        if (lastCarCollectionIndex == carCollections.length - 1) {
+        if (carCollectionNumber == carCollections.length - 1) {
             CarCollection[] newCollections = new CarCollection[carCollections.length * 2];
             System.arraycopy(carCollections, 0, newCollections, 0, carCollections.length);
             carCollections = newCollections;
@@ -24,8 +22,7 @@ public class CarCollectionService {
 
     private void add(CarCollection carCollection) {
         carCollection.setId(UUID.randomUUID().toString());
-        carCollections[lastCarCollectionIndex] = carCollection;
-        lastCarCollectionIndex++;
+        carCollections[carCollectionNumber] = carCollection;
         carCollectionNumber++;
     }
 

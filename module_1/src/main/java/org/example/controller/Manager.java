@@ -10,18 +10,17 @@ import org.example.service.CarCollectionService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Manager {
-    private static CarService carService = new CarService();
-    private static CollectionService collectionService = new CollectionService();
-    private static CarCollectionService carCollectionService = new CarCollectionService();
+    private static final CarService carService = new CarService();
+    private static final CollectionService collectionService = new CollectionService();
+    private static final CarCollectionService carCollectionService = new CarCollectionService();
 
     public void start() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         program();
         menu();
-        String position = "";
+        String position;
         while ((position = bufferedReader.readLine()) != null) {
             crud(position, bufferedReader);
             menu();
@@ -53,7 +52,7 @@ public class Manager {
     }
 
     private void crud(String position, BufferedReader reader) throws IOException {
-        String id = "";
+        String id;
         switch (position) {
             case "1" -> {
                 System.out.println("Please enter car brand");
@@ -82,8 +81,7 @@ public class Manager {
             case "3" -> {
                 Car[] cars = carService.findAll();
                 boolean truth1 = false;
-                for (int i = 0; i < carService.carNumber; i++) {
-                    Car car = cars[i];
+                for (Car car : cars) {
                     if (car != null) {
                         truth1 = true;
                         System.out.println("Car");
@@ -94,15 +92,14 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth1 == true) {
+                if (truth1) {
                     System.out.println();
                     System.out.println("Please enter car id");
                     String carId = reader.readLine();
                     System.out.println();
                     Collection[] collections = collectionService.findAll();
                     boolean truth2 = false;
-                    for (int i = 0; i < collectionService.collectionNumber; i++) {
-                        Collection collection = collections[i];
+                    for (Collection collection : collections) {
                         if (collection != null) {
                             truth2 = true;
                             System.out.println("Collection");
@@ -111,7 +108,7 @@ public class Manager {
                             System.out.println();
                         }
                     }
-                    if (truth2 == true) {
+                    if (truth2) {
                         System.out.println();
                         System.out.println("Please enter collection id");
                         String collectionId = reader.readLine();
@@ -131,8 +128,7 @@ public class Manager {
             case "4" -> {
                 Car[] cars = carService.findAll();
                 boolean truth = false;
-                for (int i = 0; i < carService.carNumber; i++) {
-                    Car car = cars[i];
+                for (Car car : cars) {
                     if (car != null) {
                         truth = true;
                         System.out.println("Car");
@@ -143,15 +139,14 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth == false) {
+                if (!truth) {
                     System.out.println("There is no car created");
                 }
             }
             case "5" -> {
                 Collection[] collections = collectionService.findAll();
                 boolean truth = false;
-                for (int i = 0; i < collectionService.collectionNumber; i++) {
-                    Collection collection = collections[i];
+                for (Collection collection : collections) {
                     if (collection != null) {
                         truth = true;
                         System.out.println("Collection");
@@ -160,15 +155,14 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth == false) {
+                if (!truth) {
                     System.out.println("There is no collection created");
                 }
             }
             case "6" -> {
                 Collection[] collections = collectionService.findAll();
                 boolean truth = false;
-                for (int i = 0; i < collectionService.collectionNumber; i++) {
-                    Collection collection = collections[i];
+                for (Collection collection : collections) {
                     if (collection != null) {
                         truth = true;
                         System.out.println("Collection");
@@ -177,14 +171,13 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth == true) {
+                if (truth) {
                     System.out.println("Please enter collection id if you want to find cars in collection");
                     id = String.valueOf(reader.readLine());
                     String[] ids = carCollectionService.findByCollectionId(id);
                     if (ids != null) {
                         Car[] vehicles = carService.findMany(ids);
-                        for (int i = 0; i < vehicles.length; i++) {
-                            Car car = vehicles[i];
+                        for (Car car : vehicles) {
                             if (car != null) {
                                 System.out.println("Car");
                                 System.out.println("id = " + car.getId());
@@ -204,8 +197,7 @@ public class Manager {
             case "7" -> {
                 Car[] cars = carService.findAll();
                 boolean truth = false;
-                for (int i = 0; i < cars.length; i++) {
-                    Car car = cars[i];
+                for (Car car : cars) {
                     if (car != null) {
                         truth = true;
                         System.out.println("Car");
@@ -216,7 +208,7 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth == true) {
+                if (truth) {
                     System.out.println("Please enter id if you want to update the car");
                     id = String.valueOf(reader.readLine());
                     System.out.println();
@@ -241,8 +233,7 @@ public class Manager {
             case "8" -> {
                 Collection[] collections = collectionService.findAll();
                 boolean truth = false;
-                for (int i = 0; i < collections.length; i++) {
-                    Collection collection = collections[i];
+                for (Collection collection : collections) {
                     if (collection != null) {
                         truth = true;
                         System.out.println("Collection");
@@ -251,7 +242,7 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth ==true) {
+                if (truth) {
                     System.out.println("Please enter id if you want to update the collection");
                     id = String.valueOf(reader.readLine());
                     System.out.println();
@@ -270,8 +261,7 @@ public class Manager {
             case "9" -> {
                 Car[] cars = carService.findAll();
                 boolean truth = false;
-                for (int i = 0; i < cars.length; i++) {
-                    Car car = cars[i];
+                for (Car car : cars) {
                     if (car != null) {
                         truth = true;
                         System.out.println("Car");
@@ -282,7 +272,7 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth == true) {
+                if (truth) {
                     System.out.println("Please enter id if you want to delete the car");
                     id = String.valueOf(reader.readLine());
                     CarCollection carCollection = carCollectionService.findOneByCarId(id);
@@ -304,8 +294,7 @@ public class Manager {
             case "10" -> {
                 Collection[] collections = collectionService.findAll();
                 boolean truth = false;
-                for (int i = 0; i < collections.length; i++) {
-                    Collection collection = collections[i];
+                for (Collection collection : collections) {
                     if (collection != null) {
                         truth = true;
                         System.out.println("Collection");
@@ -314,7 +303,7 @@ public class Manager {
                         System.out.println();
                     }
                 }
-                if (truth == true) {
+                if (truth) {
                     System.out.println("Please enter id if you want to delete the collection");
                     id = String.valueOf(reader.readLine());
                     CarCollection carCollection = carCollectionService.findOneByCollectionId(id);
@@ -335,8 +324,7 @@ public class Manager {
             case "11" -> {
                 Car[] cars = carService.findAll();
                 boolean truth1 = false;
-                for (int i = 0; i < carService.carNumber; i++) {
-                    Car car = cars[i];
+                for (Car car : cars) {
                     if (car != null) {
                         truth1 = true;
                         System.out.println("Car");
@@ -349,7 +337,7 @@ public class Manager {
                         System.out.println("There is no cars created");
                     }
                 }
-                if (truth1 == true) {
+                if (truth1) {
                     System.out.println();
                     System.out.println("Please enter car id");
                     id = String.valueOf(reader.readLine());
@@ -358,8 +346,7 @@ public class Manager {
                     if (ids != null) {
                         Collection[] selections = collectionService.findMany(ids);
                         boolean truth2 = false;
-                        for (int i = 0; i < selections.length; i++) {
-                            Collection collection = selections[i];
+                        for (Collection collection : selections) {
                             if (collection != null) {
                                 truth2 = true;
                                 System.out.println("Collection");
@@ -368,7 +355,7 @@ public class Manager {
                                 System.out.println();
                             }
                         }
-                        if (truth2 == true) {
+                        if (truth2) {
                             System.out.println("Please enter collection id");
                             id = String.valueOf(reader.readLine());
                             String collectionId = id;
@@ -379,8 +366,6 @@ public class Manager {
                             } else {
                                 System.out.println("Car or collection not found");
                             }
-                        } else {
-                            System.out.println();
                         }
                     } else {
                         System.out.println("This car is not added to collection");

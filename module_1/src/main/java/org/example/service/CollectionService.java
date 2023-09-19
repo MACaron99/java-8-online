@@ -1,20 +1,16 @@
 package org.example.service;
 
-import org.example.entity.Car;
 import org.example.entity.Collection;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class CollectionService {
 
     public Collection[] collections = new Collection[10];
     public int collectionNumber = 0;
-    private int lastCollectionIndex = 0;
 
     public void create(Collection collection) {
-        if (lastCollectionIndex == collections.length - 1) {
+        if (collectionNumber == collections.length - 1) {
             Collection[] newCollections = new Collection[collections.length * 2];
             System.arraycopy(collections, 0, newCollections, 0, collections.length);
             collections = newCollections;
@@ -26,8 +22,7 @@ public class CollectionService {
 
     private void add(Collection collection) {
         collection.setId(UUID.randomUUID().toString());
-        collections[lastCollectionIndex] = collection;
-        lastCollectionIndex++;
+        collections[collectionNumber] = collection;
         collectionNumber++;
     }
 
@@ -47,9 +42,9 @@ public class CollectionService {
     public Collection[] findMany(String[] ids) {
         Collection[] selections = new Collection[collectionNumber * collectionNumber];
         int number = 0;
-        for (int i = 0; i < ids.length; i++) {
-            for(int j = 0; j < collectionNumber; j++) {
-                if (ids[i].equals(collections[j].getId())) {
+        for (String id : ids) {
+            for (int j = 0; j < collectionNumber; j++) {
+                if (id.equals(collections[j].getId())) {
                     selections[number] = collections[j];
                     number++;
                 }

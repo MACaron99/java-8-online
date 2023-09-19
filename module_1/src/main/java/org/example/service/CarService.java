@@ -2,17 +2,15 @@ package org.example.service;
 
 import org.example.entity.Car;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 public class CarService {
 
     public Car[] cars = new Car[10];
     public int carNumber = 0;
-    private int lastCarIndex = 0;
 
     public void create(Car car) {
-        if (lastCarIndex == cars.length - 1) {
+        if (carNumber == cars.length - 1) {
             Car[] newCars = new Car[cars.length * 2];
             System.arraycopy(cars, 0, newCars, 0, cars.length);
             cars = newCars;
@@ -24,8 +22,7 @@ public class CarService {
 
     private void add(Car car) {
         car.setId(UUID.randomUUID().toString());
-        cars[lastCarIndex] = car;
-        lastCarIndex++;
+        cars[carNumber] = car;
         carNumber++;
     }
 
@@ -45,9 +42,9 @@ public class CarService {
     public Car[] findMany(String[] ids) {
         Car[] vehicles = new Car[carNumber * carNumber];
         int number = 0;
-        for (int i = 0; i < ids.length; i++) {
-            for(int j = 0; j < carNumber; j++) {
-                if (ids[i].equals(cars[j].getId())) {
+        for (String id : ids) {
+            for (int j = 0; j < carNumber; j++) {
+                if (id.equals(cars[j].getId())) {
                     vehicles[number] = cars[j];
                     number++;
                 }
