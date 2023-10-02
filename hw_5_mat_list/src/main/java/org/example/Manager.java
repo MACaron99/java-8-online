@@ -3,7 +3,6 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Manager {
 
@@ -18,6 +17,19 @@ public class Manager {
             crud(position, bufferedReader);
             menu();
         }
+    }
+
+    private void print(Number[] numbers) {
+        System.out.println();
+        System.out.println(" Your MatList");
+        System.out.print("[ ");
+        for (Number number : numbers) {
+            if (number != null) {
+                System.out.print(number + " ");
+            }
+        }
+        System.out.print("]");
+        System.out.println();
     }
 
     private void program() {
@@ -36,7 +48,7 @@ public class Manager {
         System.out.println("To join another mat list please enter 5");
         System.out.println("To join another mat list leaving common numbers please enter 6");
         System.out.println("To sort list from the largest please enter 7");
-        System.out.println("To sort list from the largest in range please enter 68");
+        System.out.println("To sort list from the largest in range please enter 8");
         System.out.println("To sort list from the largest beginning with the value please enter 9");
         System.out.println("To sort list from the smallest please enter 10");
         System.out.println("To sort list from the smallest in range please enter 11");
@@ -71,14 +83,14 @@ public class Manager {
                 System.out.println("The numbers have successfully added to the mat list");
             }
             case "3" -> {
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "4" -> {
                 System.out.println("Enter the first index");
                 int firstIndex = Integer.parseInt(reader.readLine());
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
-                System.out.println(Arrays.toString(mathList.toArray(firstIndex, lastIndex)));
+                print(mathList.toArray(firstIndex, lastIndex));
             }
             case "5" -> {
                 System.out.println();
@@ -110,7 +122,7 @@ public class Manager {
             }
             case "7" -> {
                 mathList.sortDesc();
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "8" -> {
                 System.out.println("Enter the first index");
@@ -118,17 +130,17 @@ public class Manager {
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
                 mathList.sortDesc(firstIndex, lastIndex);
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "9" -> {
                 System.out.println("Enter the value");
                 int value = Integer.parseInt(reader.readLine());
                 mathList.sortDesc(value);
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "10" -> {
                 mathList.sortAsc();
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "11" -> {
                 System.out.println("Enter the first index");
@@ -136,13 +148,13 @@ public class Manager {
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
                 mathList.sortAsc(firstIndex, lastIndex);
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "12" -> {
                 System.out.println("Enter the value");
                 int value = Integer.parseInt(reader.readLine());
                 mathList.sortAsc(value);
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "13" -> {
                 System.out.println("Enter the index");
@@ -168,10 +180,11 @@ public class Manager {
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
                 mathList.cut(firstIndex, lastIndex);
-                System.out.println(Arrays.toString(mathList.toArray()));
+                print(mathList.findAll());
             }
             case "19" -> {
                 mathList.clear();
+                System.out.println("Cleared");
             }
             case "20" -> {
                 System.out.println("Please enter the numbers");
@@ -182,6 +195,7 @@ public class Manager {
                     values[i] = Integer.parseInt(array[i]);
                 }
                 mathList.clear(values);
+                System.out.println("Cleared");
             }
             case "21" -> {
                 System.out.print("Goodbye!");

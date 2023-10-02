@@ -1,9 +1,11 @@
 package org.example;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Set;
 
 public class Dictionary<K, V> {
-    private Hashtable<K, V> hashtable;
+    private final Hashtable<K, V> hashtable;
 
     public Dictionary() {
         this.hashtable = new Hashtable<>();
