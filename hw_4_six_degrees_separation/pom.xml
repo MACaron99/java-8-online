@@ -16,7 +16,7 @@
     </properties>
 
     <build>
-        <finalName>base_operations</finalName>
+        <finalName>hw_4_six_degrees_separation</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
