@@ -4,10 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Stack;
 
 public class FileHelper {
     public static String current = System.getProperty("user.home");
-    public static String last;
+    public static Stack<String> history = new Stack<>();
 
     public static void list(String path) {
         File dir = new File(path);
@@ -29,7 +30,7 @@ public class FileHelper {
         File dir = new File(current, name);
         if (dir.exists()) {
             if (dir.isDirectory()) {
-                last = current;
+                history.push(current);
                 current = dir.getAbsolutePath();
             } else System.out.println("Directory not found");
         } else System.out.println("Directory not found");

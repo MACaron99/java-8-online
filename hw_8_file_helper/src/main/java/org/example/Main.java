@@ -52,7 +52,9 @@ public class Main {
                 System.out.println("Please enter the name of the directory you want to go");
                 FileHelper.go(reader.readLine());
             }
-            case "3" -> FileHelper.current = FileHelper.last;
+            case "3" -> {
+                if (!FileHelper.history.empty()) FileHelper.current = FileHelper.history.pop();
+            }
             case "4" -> {
                 System.out.println("Please enter the name of the file");
                 FileHelper.createFile(reader.readLine());
