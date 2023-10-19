@@ -1,4 +1,4 @@
-package org.example.service.impl;
+package org.example.service.imp;
 
 import org.example.db.CarDb;
 import org.example.entity.Car;

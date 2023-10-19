@@ -2,7 +2,6 @@ package org.example.service;
 
 import org.example.entity.BaseEntity;
 import org.example.entity.Car;
-
 import java.io.IOException;
 
 public interface Mechanic<MEC extends BaseEntity> {

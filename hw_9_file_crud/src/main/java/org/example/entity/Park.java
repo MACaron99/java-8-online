@@ -1,15 +1,14 @@
 package org.example.entity;
 
-public class Collection extends BaseEntity {
+public class Park extends BaseEntity {
 
     private String name;
 
-    public String getName() {
-
+    public String getParkName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setParkName(String name) {
         this.name = name;
     }
 }
