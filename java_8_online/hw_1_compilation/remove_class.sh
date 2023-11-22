@@ -1,0 +1,1 @@
+find . -name "*.class" -typef -print0 | xargs -0 \bin\rm -f
