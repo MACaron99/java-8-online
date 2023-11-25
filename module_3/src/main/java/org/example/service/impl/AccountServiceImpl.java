@@ -22,11 +22,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void delete(Account account) {
-        accountDao.delete(account);
-    }
-
-    @Override
     public Account findById(Long id) {
         return accountDao.findById(id);
     }

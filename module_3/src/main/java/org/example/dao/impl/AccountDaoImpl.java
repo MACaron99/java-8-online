@@ -28,13 +28,6 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public void delete(Account account) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(account);
-        entityManager.getTransaction().commit();
-    }
-
-    @Override
     public Account findById(Long id) {
         return entityManager.find(Account.class, id);
     }

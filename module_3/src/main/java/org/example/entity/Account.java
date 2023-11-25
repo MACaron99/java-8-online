@@ -22,6 +22,9 @@ public class Account extends BaseEntity {
     @Column(name = "amount")
     private Long sum;
 
+    @Column(name = "block")
+    private boolean block;
+
     @OneToMany(mappedBy = "account1", cascade =  CascadeType.REMOVE)
     private Set<Operation> outgoingOperations;
 

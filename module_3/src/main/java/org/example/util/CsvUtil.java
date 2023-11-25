@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CsvUtil {
+public final class CsvUtil {
 
     private static final JdbcFactory jdbcFactory = JdbcFactory.getInstance();
 
@@ -45,22 +45,13 @@ public class CsvUtil {
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter("history.csv"))) {
             List<String[]> list = new ArrayList<>();
             for (History history : histories) {
-                String[] strings = new String[5];
-                strings[0] = history.getOperation().getDateTime();
-                strings[1] = history.getCategory().getName();
-                Account account1 = history.getOperation().getAccount1();
-                Account account2 = history.getOperation().getAccount2();
-                if (account1 != null) {
-                    strings[2] = String.valueOf(account1.getId());
-                } else {
-                    strings[2] = "deleted";
-                }
-                if (account2 != null) {
-                    strings[3] = String.valueOf(account2.getId());
-                } else {
-                    strings[3] = "deleted";
-                }
-                strings[4] = String.valueOf(history.getOperation().getSum());
+                String[] strings = new String[] {
+                        history.getOperation().getDateTime(),
+                        history.getCategory().getName(),
+                        String.valueOf(history.getOperation().getAccount1().getId()),
+                        String.valueOf(history.getOperation().getAccount2().getId()),
+                        String.valueOf(history.getOperation().getSum())
+                };
                 list.add(strings);
             }
             csvWriter.writeAll(list);
