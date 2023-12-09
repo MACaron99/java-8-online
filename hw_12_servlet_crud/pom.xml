@@ -14,32 +14,39 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
         <lombok.version>1.18.30</lombok.version>
         <mysql-connector-j.version>8.0.33</mysql-connector-j.version>
         <hibernate-core-jakarta.version>5.6.15.Final</hibernate-core-jakarta.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version>
-        </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>${mysql-connector-j.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core-jakarta</artifactId>
-            <version>${hibernate-core-jakarta.version}</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
             <version>${jakarta.validation-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core-jakarta</artifactId>
+            <version>${hibernate-core-jakarta.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -58,5 +65,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

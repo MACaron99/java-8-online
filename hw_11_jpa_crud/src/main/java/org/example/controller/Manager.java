@@ -152,7 +152,7 @@ public class Manager {
                 if (CollectionUtils.isNotEmpty(parks)) {
                     printParks(parks);
                     System.out.println("Please enter park id");
-                    Park park =parkMechanic.findById(Long.valueOf(reader.readLine()));
+                    Park park = parkMechanic.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
                     if (park != null) {
                         parkMechanic.update(setPark(park, reader));
