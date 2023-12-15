@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="main_content">
+    <form method="post" th:action="@{'/join/add/' + ${parkId}}">
+        <div class="mb-3">
+            <label for="carId" class="form-label">Choose the car</label>
+            <select name="carId" class="form-select" id="carId">
+                <th:block th:each="car : ${availableCars}">
+                    <option th:value="${car.getId()}" th:text="${car.getCarBrand()} + ' ' + ${car.getCarModel()} + ' ' + ${car.getCarYear()}"></option>
+                </th:block>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+</body>
+</html>

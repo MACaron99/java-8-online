@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="main_content">
+  <form method="post" th:action="@{'/cars/update/' + ${car.getId()}}" th:object="${car}">
+    <div class="mb-3">
+      <label for="exampleInputCarBrand" class="form-label">Car brand</label>
+      <input type="text" class="form-control" id="exampleInputCarBrand" th:field="*{carBrand}" th:value="${car.getCarBrand()}">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputCarModel" class="form-label">Car model</label>
+      <input type="text" class="form-control" id="exampleInputCarModel" th:field="*{carModel}" th:value="${car.getCarModel()}">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputCarYear" class="form-label">Car year</label>
+      <input type="number" class="form-control" id="exampleInputCarYear" th:field="*{carYear}" th:value="${car.getCarYear()}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</body>
+</html>

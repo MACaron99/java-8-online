@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="main_content">
+<form method="post" th:action="@{/cars/new}" th:object="${car}">
+    <div class="mb-3">
+        <label for="exampleInputCarBrand" class="form-label">Car Brand</label>
+        <input type="text" class="form-control" id="exampleInputCarBrand" th:field="*{carBrand}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputCarModel" class="form-label">Car Model</label>
+        <input type="text" class="form-control" id="exampleInputCarModel" th:field="*{carModel}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputCarYear" class="form-label">Car year</label>
+        <input type="number" class="form-control" id="exampleInputCarYear" th:field="*{carYear}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="main_content">
+    <form method="post" th:action="@{'/parks/update/' + ${park.getId()}}" th:object="${park}">
+        <div class="mb-3">
+            <label for="exampleInputParkName" class="form-label">Park Name</label>
+            <input type="text" class="form-control" id="exampleInputParkName" th:field="*{parkName}" th:value="${park.getParkName()}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    dl, ol, ul {
+      margin: auto;
+    }
+
+    select {
+      border-radius: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+<div layout:fragment="main_content">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <div th:if="${parkId == null}"><h3>All Cars</h3></div>
+        <div th:if="${parkId != null}"><h3>Park Cars</h3></div>
+        <div th:if="${parkId == null}">
+          <a type="button" class="btn btn-primary" th:href="@{/cars/new}">new car</a>
+        </div>
+        <div th:if="${parkId != null}">
+          <a type="button" class="btn btn-primary" th:href="@{'/join/add/' + ${parkId}}">add car</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-sm table-hover table-striped">
+        <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Year</th>
+          <th th:if="${parkId == null}">Parks</th>
+          <th th:if="${parkId == null}">Update</th>
+          <th th:if="${parkId == null}">Delete</th>
+          <th th:if="${parkId != null}">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${pageData.getItems()}">
+          <td th:text="${car.getCarBrand()}"></td>
+          <td th:text="${car.getCarModel()}"></td>
+          <td th:text="${car.getCarYear()}"></td>
+          <td th:if="${parkId == null}">
+            <div class="d-flex flex-column">
+              <a th:each="park,iter : ${car.getParkInfoList()}"
+                 type="button"
+                 class="btn btn-sm btn-outline-dark"
+                 th:classappend="${iter.first ? '' : 'mt-1'}"
+                 th:href="@{'/cars?parkId=' + ${park.getParkId()}}"
+                 th:text="${park.getParkName()}">name</a>
+            </div>
+          </td>
+          <td th:if="${parkId == null}">
+            <a type="button" class="btn btn-primary" th:href="@{'/cars/update/' + ${car.getId()}}">update</a>
+          </td>
+          <td>
+            <span th:if="${parkId == null}">
+              <a type="button" class="btn btn-danger" th:href="@{'/cars/delete/' + ${car.getId()}}">delete</a>
+            </span>
+            <span th:if="${parkId != null}">
+              <a type="button" class="btn btn-danger" th:href="@{'/join/remove?parkId=' + ${parkId} + '&carId=' + ${car.getId()}}">remove</a>
+            </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-center align-items-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${pageData.isFirst() ? 'disabled' : ''}">
+              <a class="page-link" role="button" onclick="runPagination(1)">First</a>
+            </li>
+            <li class="page-item" th:classappend="${pageData.isHasPrevious() ? '' : 'disabled'}">
+              <a class="page-link" role="button"
+                 th:onclick="|runPagination(${pageData.getCurrentPage() - 1})|">Previous</a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" th:text="|${pageData.getCurrentPage()} / ${pageData.getTotalPages()}|">Previous</a>
+            </li>
+            <li class="page-item">
+              <select class="form-select" aria-label="Default select example" id="selectSize">
+                <option
+                        th:each="i : ${pageData.getSizes()}"
+                        th:value="${i}"
+                        th:text="${i}"
+                        th:selected="${i == pageData.getPageSize()}"></option>
+              </select>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" th:text="${pageData.getTotalElements()}">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${pageData.isHasNext() ? '' : 'disabled'}">
+              <a class="page-link" role="button"
+                 th:onclick="|runPagination(${pageData.getCurrentPage() + 1})|">Next</a>
+            </li>
+            <li class="page-item" th:classappend="${pageData.isLast() ? 'disabled' : ''}">
+              <a class="page-link" role="button"
+                 th:onclick="|runPagination(${pageData.getTotalPages()})|">Last</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <form method="post" th:action="@{/cars}" id="data_table_car" style="visibility: hidden">
+    <input type="submit" class="form-control" id="data_table_car_submit">
+  </form>
+
+  <span th:data-sort-by="${pageData.getSortBy()}"
+        th:data-sort-type="${pageData.getSortType()}"
+        th:data-current-page="${pageData.getCurrentPage()}"
+        th:data-page-size="${pageData.getPageSize()}"
+        th:data-park-id="${parkId}"
+        id="pageData">
+    </span>
+</div>
+
+</body>
+</html>
