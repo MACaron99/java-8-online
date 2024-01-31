@@ -1,0 +1,30 @@
+<h3>Your Favorites</h3>
+<section class="products-wrapper">
+      <ng-container *ngIf="products.length > 0; else empty">
+        <section class="user-product-card" *ngFor="let product of products">
+          <div class="user-product-image">
+            <img src="../../../..{{product.image}}" alt="{{product.name}}" />
+          </div>
+          <div class="user-product-details">
+
+            <header class="user-product-header">
+              <h5 routerLink="/pdp/{{product.id}}">{{product.name}}</h5>
+            </header>
+
+            <span class="user-product-price">{{product.price.toFixed(2)}}$</span>
+
+            <div class="user-product-action">
+
+              <a class="details-btn" (click)="removeFromFavorites(product.id)"> Remove </a>
+
+            </div>
+
+          </div>
+        </section>
+      </ng-container>
+
+  <ng-template #empty>
+    <h1 class="no-content">Check our <a routerLink="/plp">Catalog</a> and find your car...</h1>
+  </ng-template>
+
+</section>

@@ -1,0 +1,24 @@
+<h3>Registration Page</h3>
+<section class="form-wrapper">
+  <section class="form-section">
+    <form class="register-form" [formGroup]="form">
+      <label for="register-email"> Email address </label>
+      <input type="email" class="form-input" id="register-email" name="email" aria-describedby="emailHelp"
+             placeholder="artem@email.com" formControlName="email"/>
+
+      <label for="register-password">Password </label>
+      <input type="password" class="form-input" id="register-password" name="password"
+             placeholder="******" formControlName="password">
+
+      <button type="submit" class="register-button" (click)="register()" *ngIf="form.valid">Register</button>
+      <button type="submit" class="register-button" disabled *ngIf="!form.valid">Register</button>
+
+      <p>Already have an account...
+        <a routerLink="/login">Login</a> now.
+      </p>
+    </form>
+  </section>
+  <section class="form-img">
+    <img src="../../../../assets/register/register.jpg" alt="" />
+  </section>
+</section>

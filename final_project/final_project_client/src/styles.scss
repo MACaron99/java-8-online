@@ -1,0 +1,82 @@
+@import "https://use.fontawesome.com/releases/v5.10.2/css/all.css";
+
+*, *::before, *::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html, body {
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.5em;
+  color: #302f2f;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.01),
+      rgba(0, 0, 0, 0.5)
+  );
+  background-size: cover;
+}
+
+body, input, textarea{
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+label, button {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: inherit;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-top: 1em;
+  line-height: normal;
+  font-weight: normal;
+  text-transform: capitalize;
+  font-variant: small-caps;
+}
+
+h1 {font-size: 2.5em;}
+h2 {font-size: 2.3em;}
+h3 {font-size: 2.0em;}
+h4 {font-size: 1.8em;}
+h5 {font-size: 1.5em;}
+h6 {font-size: 1.2em;}
+
+a {
+  outline: none;
+  text-decoration: none;
+  font-size: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+.fas {
+  font-family: "Font Awesome 5 Free", serif;
+  font-weight: 900;
+}
+
+.no-content {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.no-content a {
+  color: #fde167;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+app-root {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-msg {
+  color: #ff0000;
+  align-self: flex-start;
+  font-size: 0.8em;
+}

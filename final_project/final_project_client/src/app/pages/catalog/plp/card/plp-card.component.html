@@ -1,0 +1,26 @@
+<ng-container *ngIf="product">
+  <section class="product-card">
+    <div class="product-image">
+      <img src="../../../../..{{product.image}}" alt="{{product.name}}" />
+    </div>
+
+    <div class="product-details">
+      <header class="product-header">
+        <h5 routerLink="/pdp/{{product.id}}">{{product.name}}</h5>
+      </header>
+
+      <span class="product-price">{{product.price}}$</span>
+
+      <p>{{product.description | shortPipe: 200}}</p>
+
+      <div class="product-action">
+        <a class="details-btn" (click)="addToFavorites(product.id)" *ngIf="isLoggedIn$ | async">
+          <i class="fas fa-thumbs-up"></i> Add to favorites </a>
+        <button class="add-btn" routerLink="/checkout" *ngIf="isLoggedIn$">
+          <i class="fas fa-shopping-cart"></i> Buy </button>
+        <button class="add-btn" routerLink="/login" *ngIf="!isLoggedIn$">
+          <i class="fas fa-shopping-cart"></i> Buy </button>
+      </div>
+    </div>
+  </section>
+</ng-container>

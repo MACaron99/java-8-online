@@ -1,0 +1,28 @@
+<h3>Car Catalog</h3>
+<section class="products-wrapper">
+  <aside class="products-aside">
+    <div class="sort-div">
+      <label for="sort">Sort By</label>
+      <select id="sort" (change)="onChange($event.target)">
+        <option value="sortDefault">Default</option>
+        <option value="sortToHightPrice">Sort by price: low to high</option>
+        <option value="sortToLowPrice">Sort by price: high to low</option>
+        <option value="sortAZ">Name: A-Z</option>
+        <option value="sortZA">Name: Z-A</option>
+      </select>
+    </div>
+
+    <div class="filter-div">
+      <span>Filter By Price</span>
+      <button (click)="filter(0, 50000)">0 - 50 000 $</button>
+      <button (click)="filter(50000, 75000)">50 000 $ - 75 000 $</button>
+      <button (click)="filter(75000, 100000)">75 000 $ - 100 000 $</button>
+      <button (click)="filter(100000)">Above 100 000 $</button>
+      <button (click)="filter(0)">All Price</button>
+    </div>
+  </aside>
+
+  <section class="products-list">
+    <app-plp-card *ngFor="let product of products" [product]="product"></app-plp-card>
+  </section>
+</section>

@@ -1,0 +1,60 @@
+.checkout-box {
+  background: #ffffff;
+  width: 30%;
+  margin: 3em auto;
+  border-radius: 0.3em;
+  box-shadow: 0px -1px 5px 0px rgba(0,0,0,0.75);
+}
+
+.checkout-box h4,
+.checkout-box div {
+  padding:  0.8em 0 0;
+  margin: auto;
+}
+
+.checkout-box div span {
+  color: #202020;
+  font-weight: 600;
+}
+
+.checkout-box button {
+  width: 80%;
+  border: 1px solid #fde167;
+  padding: 1em 1.5em;
+  border-radius: 0.3em;
+  text-transform: uppercase;
+  color: #202020;
+  background: #fde167;
+  margin: 1.5em;
+}
+
+.checkout-box button:hover {
+  border-color: #202020;
+  color: #202020;
+  background: transparent;
+  box-shadow: 0 0 5px 1px #202020;
+  cursor: pointer;
+}
+
+.personal-info div {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+
+.personal-info div input {
+  border: 1px solid #202020;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+
+.personal-info div  {
+  margin-bottom: 1.5em;
+}
+
+.personal-info input:hover,
+.personal-info input:focus {
+  box-shadow: 0 0 5px 1px #202020;
+  outline: none;
+}

@@ -1,0 +1,16 @@
+<h3>Checkout</h3>
+<section class="checkout-box">
+  <h4>Your order is accepted</h4>
+  <form #checkoutForm="ngForm">
+    <div class="personal-info">
+      <div>
+        <label>For more details, indicate your mobile phone number please</label>
+        <input type="text" class="checkout-input" id="phone" name="phone"
+               placeholder="+38(000) 888 00 00" #phoneInput="ngModel" ngModel required touched/>
+        <p class="error-msg" *ngIf="phoneInput.touched && phoneInput.errors?.['required']">Phone is required!</p>
+      </div>
+    </div>
+    <div>Our operator will contact you</div>
+    <button [disabled]="checkoutForm.invalid" routerLink="/home">Submit</button>
+  </form>
+</section>

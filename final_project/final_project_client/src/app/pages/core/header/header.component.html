@@ -1,0 +1,31 @@
+<header class="site-header">
+  <section class="header-logo">
+    <h1><a routerLink="/home">AUTO Formula</a></h1>
+    <p>Angular</p>
+  </section>
+
+  <section>
+    <ul class="header-contacts">
+      <li><strong>Phone:</strong>+38(098) 017 69 75</li>
+      <li><strong>Email:</strong>artemmakarenko12&#64;gmail.com</li>
+    </ul>
+  </section>
+</header>
+<nav class="mainav">
+  <div>
+    <a routerLink="/">Home</a>
+    <a routerLink="/plp">Store</a>
+  </div>
+
+    <div class="user" *ngIf="isLoggedIn$ | async; else login">
+      <a routerLink="/profile">Profile</a>
+      <a routerLink="/home" (click)="logout()" *ngIf="isLoggedIn$">Logout</a>
+    </div>
+
+    <ng-template #login>
+      <div class="guest">
+        <a routerLink="/login" *ngIf="!(isLoggedIn$ | async)">Login</a>
+        <a routerLink="/register">Register</a>
+      </div>
+    </ng-template>
+</nav>

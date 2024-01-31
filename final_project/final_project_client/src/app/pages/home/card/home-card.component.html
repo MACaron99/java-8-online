@@ -1,0 +1,13 @@
+<a [routerLink]="['/pdp', product.id]">
+  <section class="home-product">
+    <section class="home-product-image">
+      <img src="../../../..{{product.image}}" alt="{{product.name}}" />
+    </section>
+    <header class="home-wine-header">
+      <h6>{{product.name}}</h6>
+    </header>
+    <section class="home-wine-content">
+      <p>${{product.price}}</p>
+    </section>
+  </section>
+</a>

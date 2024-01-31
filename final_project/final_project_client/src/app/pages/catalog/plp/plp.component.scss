@@ -1,0 +1,64 @@
+.products-wrapper {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.products-list {
+  margin-left: 1em;
+}
+
+.products-aside {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.filter-div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.filter-div span {
+  font-size: 1.3em;
+  padding-bottom: 0.3em;
+}
+
+.filter-div button {
+  padding: 0.5em 0.8em;
+  margin: 0.2em 0;
+  border: 1px solid #ffffffb9;
+  border-radius: 0.3em;
+  color: #202020;
+  background: #ffffffb9;
+}
+
+.filter-div button:hover{
+  background: #fde167;
+  border-color: #fde167;
+  box-shadow: 0px -1px 15px 0px rgb(32, 32, 32, 0.9);
+}
+
+.sort-div {
+  display: flex;
+  margin-top: 1em;
+  flex-direction: column;
+}
+
+.sort-div label {
+  padding-right: 0.5em;
+  font-size: 1.3em;
+  padding-bottom: 0.3em;
+}
+
+#sort {
+  padding: 0.5em 0.8em;
+  background: #ffffffb9;
+  border: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #202020;
+  border-radius: 0.3em;
+  font-size: 1.1em;
+}

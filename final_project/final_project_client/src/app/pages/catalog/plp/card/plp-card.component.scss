@@ -1,0 +1,90 @@
+.product-card {
+  box-shadow: 0px -1px 15px 0px rgb(32, 32, 32, 0.9);
+  border-radius: 0.3em;
+  display: flex;
+  position: relative;
+  margin: 2em 0;
+  background-color: #ffffff;
+}
+
+.product-image {
+  flex: 0 0 20%;
+  margin: 1em;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image img {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: 100%;
+  position: absolute;
+}
+
+.product-image img::after {
+  padding-top: 100%;
+  content: '';
+  display: block;
+}
+
+.product-details {
+  text-align: left;
+  margin: 0;
+  padding: 0 2em;
+}
+
+.product-details p {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.product-header {
+  margin: 0.5em 0;
+  cursor: pointer;
+}
+
+.product-price {
+  font-weight: 600;
+}
+
+.product-price::after {
+  display: block;
+  content: '';
+  background-color: rgba(117, 117, 117, 0.993);
+  width: 4em;
+  height: 0.1em;
+  margin: 0.5em 0;
+}
+
+.product-action {
+  margin: 1em 0;
+}
+
+.product-action i {
+  padding-right: 0.5em;
+}
+
+.details-btn, .add-btn {
+  border: 1px solid #fde167;
+  padding: 0.5em 0.8em;
+  border-radius: 0.3em;
+  text-transform: uppercase;
+  color: #202020;
+  background: #fde167;
+  margin: 0.2em 0.8em 0 0;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.add-btn {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.details-btn:hover, .add-btn:hover {
+  border: 1px solid transparent;
+  background-color: transparent;
+  box-shadow: 0 0 5px 1px #202020;
+  color: #202020;
+  cursor: pointer;
+}

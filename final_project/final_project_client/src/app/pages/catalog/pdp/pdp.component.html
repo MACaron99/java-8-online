@@ -1,0 +1,52 @@
+<section class="details-wrapper" *ngIf="product !== undefined">
+  <div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let image of sortedProductImages(); let i = index" [class.active]="i === 0">
+        <img src="../../../..{{image}}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"
+            (click)="setActiveImage((activeImageIndex - 1 + product.images.length) % product.images.length)">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"
+            (click)="setActiveImage((activeImageIndex + 1) % product.images.length)">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <section>
+    <div class="details">
+      <header class="details-header">
+        <h5>{{product.name}}</h5>
+      </header>
+
+      <span class="details-price">{{product.price}}$</span>
+
+      <p>{{product.description}}</p>
+
+      <span class="details-price">Body Type: {{product.bodyType}}</span>
+      <span class="details-price">Seat Number: {{product.seatNumber}}</span>
+      <span class="details-price">Door Number: {{product.doorNumber}}</span>
+      <span class="details-price">Engine: {{product.engine}}</span>
+      <span class="details-price">Fuel Type: {{product.fuelType}}</span>
+      <span class="details-price">Transmission Type: {{product.transmissionType}}</span>
+      <span class="details-price">Wheel Drive Type: {{product.wheelDriveType}}</span>
+      <span class="details-price">Product Color: {{product.productColor}}</span>
+
+      <div class="details-action">
+        <button class="like-btn" (click)="addToFavorites(product.id)" *ngIf="isLoggedIn$ | async">
+          <i class="fas fa-thumbs-up"></i> Add to favorites </button>
+
+        <button class="usr-btn" routerLink="/checkout" *ngIf="isLoggedIn$">
+          <i class="fas fa-shopping-cart"></i> Buy </button>
+
+        <button class="usr-btn" routerLink="/login" *ngIf="!isLoggedIn$">
+          <i class="fas fa-shopping-cart"></i> Buy </button>
+      </div>
+    </div>
+  </section>
+</section>

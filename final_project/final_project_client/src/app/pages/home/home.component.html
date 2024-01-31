@@ -1,0 +1,6 @@
+<section class="home-wrapper">
+  <h3>On Our Store</h3>
+  <section class="top-products" >
+    <app-home-card *ngFor="let product of products$ | async" [product]="product"></app-home-card>
+  </section>
+</section>
