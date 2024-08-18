@@ -8,12 +8,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Manager {
+
     private static final CarMechanic carMechanic = new CarMechanicImpl();
 
     public void start() throws IOException {
+
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         program();
         menu();
+
         String position;
         while ((position = bufferedReader.readLine()) != null) {
             crud(position, bufferedReader);
@@ -44,18 +47,23 @@ public class Manager {
             case "1" -> {
                 System.out.println("Please enter car brand");
                 String cb = reader.readLine();
+
                 System.out.println("Please enter car model");
                 String cm = reader.readLine();
+
                 System.out.println("Please enter car mileage");
                 int carMileage = Integer.parseInt(reader.readLine());
+
                 Car car = new Car();
                 car.setCarBrand(cb);
                 car.setCarModel(cm);
                 car.setCarMileage(carMileage);
+
                 carMechanic.create(car);
             }
             case "2" -> {
                 Car[] cars = carMechanic.findAll();
+
                 for (Car car : cars) {
                     if (car != null) {
                         System.out.println("id = " + car.getId());
@@ -69,18 +77,23 @@ public class Manager {
                 System.out.println("Please enter id if you want to update the car");
                 id = String.valueOf(reader.readLine());
                 carMechanic.findOne(id);
+
                 System.out.println("Please enter car brand");
                 String brand = reader.readLine();
+
                 System.out.println("Please enter car model");
                 String model = reader.readLine();
+
                 System.out.println("Please enter car mileage");
                 int mileage = Integer.parseInt(reader.readLine());
+
                 carMechanic.update(brand, model, mileage);
                 System.out.println("Your car was successfully updated");
             }
             case "4" -> {
                 System.out.println("Please enter id if you want to delete the car");
                 id = String.valueOf(reader.readLine());
+
                 carMechanic.findOne(id);
                 carMechanic.delete();
                 System.out.println("Your car was successfully deleted");

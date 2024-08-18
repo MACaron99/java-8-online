@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class CarDb {
+
     public Car[] cars = new Car[10];
     private int lastCarIndex = 0;
     private int k;
@@ -28,7 +29,7 @@ public class CarDb {
         return cars;
     }
 
-    public Car findOne(String id) {
+    public void findOne(String id) {
         for (int i = 0; i < cars.length; i++) {
             if (cars[i] != null) {
                 if (cars[i].getId().equalsIgnoreCase(id)) {
@@ -36,21 +37,18 @@ public class CarDb {
                 }
             }
         }
-        return cars[k];
     }
 
-    public Car update(String brand, String model, int mileage) {
+    public void update(String brand, String model, int mileage) {
         cars[k].setCarBrand(brand);
         cars[k].setCarModel(model);
         cars[k].setCarMileage(mileage);
-        return cars[k];
     }
 
-    public Car[] delete() {
+    public void delete() {
         Car[] a = Arrays.copyOfRange(cars, 0, k);
         Car[] b = Arrays.copyOfRange(cars, k + 1, cars.length);
-        Car[] cars = Arrays.copyOf(a, a.length + b.length + 1);
+        cars = Arrays.copyOf(a, a.length + b.length + 1);
         System.arraycopy(b, 0, cars, a.length, b.length);
-        return this.cars = cars;
     }
 }
