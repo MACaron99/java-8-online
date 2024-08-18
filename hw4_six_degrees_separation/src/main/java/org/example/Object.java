@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Object {
+
     private final int id;
     private final List<Object> connections;
 
