@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Lesson {
+
     public static void time(BufferedReader reader) throws IOException {
+
         System.out.println("Program 3 - The end of the lesson");
         System.out.println("Description: defines when the specified lesson ends.");
 
@@ -15,8 +17,8 @@ public class Lesson {
 
         String[] parts = input.split(" ");
 
-        int startHour = 0;
-        int startMinute = 0;
+        int startHour;
+        int startMinute;
 
         if (parts.length == 2) {
             try {
@@ -44,13 +46,12 @@ public class Lesson {
         int lessonNumber = Integer.parseInt(reader.readLine());
 
         int startTime = 60 * startHour + startMinute;
-        int totalMinutes = startTime + lessonNumber * lessonDuration + (oddBreak * (lessonNumber / 2)) + (evenBreak * ((lessonNumber - 1) / 2));
+        int totalMinutes = startTime + lessonNumber * lessonDuration + (oddBreak * (lessonNumber / 2))
+                + (evenBreak * ((lessonNumber - 1) / 2));
 
         int endHour = totalMinutes / 60;
         int endMinute = totalMinutes % 60;
 
         System.out.println("Lesson end time: " + endHour + ":" + endMinute);
-
-        reader.close();
     }
 }
