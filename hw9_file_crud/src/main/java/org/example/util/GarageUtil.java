@@ -8,7 +8,9 @@ import java.util.UUID;
 public class GarageUtil {
 
     public static <E extends BaseEntity> String generateId(Collection<E> entities) {
+
         String id = UUID.randomUUID().toString();
+
         if (entities.stream().anyMatch(e -> e.getId().equals(id))) {
             generateId(entities);
         }

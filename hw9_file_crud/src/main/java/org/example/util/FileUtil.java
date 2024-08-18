@@ -7,6 +7,7 @@ public class FileUtil {
 
     public static void fileCheck(String fileName) {
         File file = new File(fileName);
+
         if (!file.exists()) {
             try {
                 if (!file.createNewFile()) {
