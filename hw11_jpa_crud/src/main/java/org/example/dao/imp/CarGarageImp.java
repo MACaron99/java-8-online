@@ -8,7 +8,8 @@ import java.util.Collection;
 
 public class CarGarageImp implements CarGarage {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
+    private final EntityManagerFactory emf = Persistence.
+            createEntityManagerFactory("jpa-hibernate-mysql");
     private final EntityManager entityManager = emf.createEntityManager();
 
     @Override

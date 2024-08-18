@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>hw_11_jpa_crud</artifactId>
+    <artifactId>hw11_jpa_crud</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -15,7 +15,7 @@
         <commons-io.version>2.13.0</commons-io.version>
         <java.version>17</java.version>
         <lombok.version>1.18.30</lombok.version>
-        <mysql-connector-j.version>8.0.33</mysql-connector-j.version>
+        <mysql-connector-j.version>8.2.0</mysql-connector-j.version>
         <hibernate-core-jakarta.version>5.6.15.Final</hibernate-core-jakarta.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <commons-collections4.version>4.4</commons-collections4.version>

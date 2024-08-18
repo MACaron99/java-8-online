@@ -18,10 +18,12 @@ public class Manager {
 
     private static final CarMechanic carMechanic = new CarMechanicImp();
     private static final ParkMechanic parkMechanic = new ParkMechanicImp();
+
     public void start() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         program();
         menu();
+
         String position;
         while ((position = bufferedReader.readLine()) != null) {
             crud(position, bufferedReader);
@@ -32,7 +34,8 @@ public class Manager {
     private void program() {
         System.out.println();
         System.out.println("Program CRUD SQL");
-        System.out.println("Welcome to the program CRUD SQL. CRUD-application for working with two entities, joining them and keeping data in database");
+        System.out.println("Welcome to the program CRUD SQL. CRUD-application for working with two entities, " +
+                "joining them and keeping data in database");
     }
 
     private void menu() {
@@ -53,32 +56,44 @@ public class Manager {
     }
 
     private void crud(String position, BufferedReader reader) throws IOException {
+
         switch (position) {
+
             case "1" -> {
                 carMechanic.create(setCar(new Car(), reader));
                 System.out.println("Car has been created");
             }
+
             case "2" -> {
                 parkMechanic.create(setPark(new Park(), reader));
                 System.out.println("Park has been created");
             }
+
             case "3" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(cars)) {
                     printCars(cars);
+
                     System.out.println("Please enter car id");
                     Car car = carMechanic.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (car != null) {
                         Collection<Park> parks = parkMechanic.findAll();
+
                         if (CollectionUtils.isNotEmpty(parks)) {
                             printParks(parks);
+
                             System.out.println("Please enter park id");
                             Park park = parkMechanic.findById(Long.valueOf(reader.readLine()));
                             System.out.println();
+
                             if (park != null) {
                                 park.getCars().add(car);
+
                                 parkMechanic.update(park);
+
                                 System.out.println("Сar has been added to park");
                             } else {
                                 System.out.println("Park not found");
@@ -93,31 +108,40 @@ public class Manager {
                     System.out.println("No car found");
                 }
             }
+
             case "4" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(cars)) {
                     printCars(cars);
                 } else {
                     System.out.println("No car found");
                 }
             }
+
             case "5" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(parks)) {
                     printParks(parks);
                 } else {
                     System.out.println("No park found");
                 }
             }
+
             case "6" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(parks)) {
                     printParks(parks);
+
                     System.out.println("Please enter park id");
                     Park park = parkMechanic.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (park != null) {
                         Set<Car> cars = park.getCars();
+
                         if (CollectionUtils.isNotEmpty(cars)) {
                             printCars(cars);
                         } else {
@@ -130,15 +154,20 @@ public class Manager {
                     System.out.println("No park found");
                 }
             }
+
             case "7" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(cars)) {
                     printCars(cars);
+
                     System.out.println("Please enter car id");
                     Car car = carMechanic.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (car != null) {
                         carMechanic.update(setCar(car, reader));
+
                         System.out.println("Car has been updated");
                     } else {
                         System.out.println("Car not found");
@@ -147,15 +176,20 @@ public class Manager {
                     System.out.println("No car found");
                 }
             }
+
             case "8" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(parks)) {
                     printParks(parks);
+
                     System.out.println("Please enter park id");
                     Park park = parkMechanic.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (park != null) {
                         parkMechanic.update(setPark(park, reader));
+
                         System.out.println("Park has been updated");
                     } else {
                         System.out.println("Park not found");
@@ -164,26 +198,35 @@ public class Manager {
                     System.out.println("No park found");
                 }
             }
+
             case "9" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (!cars.isEmpty()) {
                     printCars(cars);
+
                     System.out.println("Please enter car id");
                     Long id = Long.valueOf(reader.readLine());
+
                     Car car = carMechanic.findById(id);
                     System.out.println();
+
                     if (car != null) {
                         Set<Park> parks = car.getParks();
+
                         if (CollectionUtils.isNotEmpty(parks)) {
                             for (Park park : parks) {
                                 Set<Car> cars1 = park.getCars();
+
                                 if (CollectionUtils.isNotEmpty(cars1)) {
                                     cars1.removeIf(car1 -> car1.getId().equals(id));
+
                                     parkMechanic.update(park);
                                 }
                             }
                         }
                         carMechanic.delete(car);
+
                         System.out.println("Car has been deleted");
                     } else {
                         System.out.println("Car not found");
@@ -192,15 +235,20 @@ public class Manager {
                     System.out.println("No car found");
                 }
             }
+
             case "10" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(parks)) {
                     printParks(parks);
+
                     System.out.println("Please enter park id");
                     Park park = parkMechanic.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (park != null) {
                         parkMechanic.delete(park);
+
                         System.out.println("Park has been deleted");
                     } else {
                         System.out.println("Park not found");
@@ -209,26 +257,37 @@ public class Manager {
                     System.out.println("No park found");
                 }
             }
+
             case "11" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (CollectionUtils.isNotEmpty(cars)) {
                     printCars(cars);
+
                     System.out.println("Please enter car id");
                     Long id = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     Car car = carMechanic.findById(id);
+
                     if (car != null) {
                         Set<Park> parks = car.getParks();
+
                         if (CollectionUtils.isNotEmpty(parks)) {
                             printParks(parks);
+
                             System.out.println("Please enter park id");
                             Park park = parkMechanic.findById(Long.valueOf(reader.readLine()));
                             System.out.println();
+
                             if (park != null) {
                                 Set<Car> cars1 = park.getCars();
+
                                 if (CollectionUtils.isNotEmpty(cars1)) {
                                     cars1.removeIf(car1 -> car1.getId().equals(id));
+
                                     parkMechanic.update(park);
+
                                     System.out.println("Car has been deleted from park");
                                 } else {
                                     System.out.println("No car found");
@@ -246,6 +305,7 @@ public class Manager {
                     System.out.println("No car found");
                 }
             }
+
             case "0" -> {
                 System.out.println("Goodbye!");
                 System.exit(0);
@@ -276,16 +336,20 @@ public class Manager {
     private Car setCar(Car car, BufferedReader reader) throws IOException {
         System.out.println("Please enter car brand");
         car.setCarBrand(reader.readLine());
+
         System.out.println("Please enter car model");
         car.setCarModel(reader.readLine());
+
         System.out.println("Please enter car year");
         car.setCarYear(Integer.parseInt(reader.readLine()));
+
         return car;
     }
 
     private Park setPark(Park park, BufferedReader reader) throws IOException {
         System.out.println("Please enter park name");
         park.setName(reader.readLine());
+
         return park;
     }
 }
