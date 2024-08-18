@@ -46,7 +46,9 @@ public class CarCollectionService {
 
     public String[] findByCollectionId(String id) {
         int number = 0;
+
         String[] ids = new String[carCollectionNumber];
+
         for (int i = 0; i < carCollectionNumber; i++) {
             if (carCollections[i].getCollectionId().equals(id)) {
                 ids[number] = carCollections[i].getCarId();
@@ -62,7 +64,9 @@ public class CarCollectionService {
 
     public String[] findByCarId(String id) {
         int number = 0;
+
         String[] ids = new String[carCollectionNumber];
+
         for (int i = 0; i < carCollectionNumber; i++) {
             if (carCollections[i].getCarId().equals(id)) {
                 ids[number] = carCollections[i].getCollectionId();
@@ -89,7 +93,9 @@ public class CarCollectionService {
 
     public void delete(CarCollection carCollection) {
         int count = 0;
+
         CarCollection[] newCarCollections = new CarCollection[10];
+
         for (int i = 0; i < carCollectionNumber; i++) {
             if (!carCollections[i].equals(carCollection)) {
                 newCarCollections[count] = carCollections[i];

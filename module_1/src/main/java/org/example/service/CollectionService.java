@@ -41,7 +41,9 @@ public class CollectionService {
 
     public Collection[] findMany(String[] ids) {
         Collection[] selections = new Collection[collectionNumber * collectionNumber];
+
         int number = 0;
+
         for (String id : ids) {
             for (int j = 0; j < collectionNumber; j++) {
                 if (id.equals(collections[j].getId())) {
@@ -68,7 +70,9 @@ public class CollectionService {
 
     public void delete(Collection collection) {
         int count = 0;
+
         Collection[] newCollections = new Collection[10];
+
         for (int i = 0; i < collectionNumber; i++) {
             if (!collections[i].equals(collection)) {
                 newCollections[count] = collections[i];

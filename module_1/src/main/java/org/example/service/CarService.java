@@ -41,7 +41,9 @@ public class CarService {
 
     public Car[] findMany(String[] ids) {
         Car[] vehicles = new Car[carNumber * carNumber];
+
         int number = 0;
+
         for (String id : ids) {
             for (int j = 0; j < carNumber; j++) {
                 if (id.equals(cars[j].getId())) {
@@ -68,7 +70,9 @@ public class CarService {
 
     public void delete(Car car) {
         int count = 0;
+
         Car[] newCars = new Car[10];
+
         for (int i = 0; i < carNumber; i++) {
             if (!cars[i].equals(car)) {
                 newCars[count] = cars[i];
