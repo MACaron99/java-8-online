@@ -8,7 +8,9 @@ public class InputWriter {
 
     public static void write() {
         File file = new File("input.txt");
+
         if (!file.exists()) {
+
             try (PrintWriter writer = new PrintWriter("input.txt")) {
                 writer.println("15");
 
@@ -120,6 +122,7 @@ public class InputWriter {
                 writer.println("berlin frankfurt");
                 writer.println("koln munchen");
                 writer.println("stuttgart bremen");
+
             } catch (IOException e) {
                 System.out.println("e = " + e.getMessage());
             }

@@ -3,5 +3,5 @@ mvn clean package
 if [ $? -eq 0 ]; then
   java -jar target/module_2.jar
 else
-    echo "An error occurred while compiling and building the project"
+  echo "An error occurred while compiling and building the project"
 fi
