@@ -62,13 +62,17 @@ public class MatList<N extends Number> {
     public final void intersection(MatList<N>... ml) {
         if (ml.length > 0) {
             int minSize = ml[0].numbers.length;
+
             for (int i = 1; i < ml.length; i++) {
                 if (ml[i].numbers.length < minSize) {
                     minSize = ml[i].numbers.length;
                 }
             }
+
             int newIndex = 0;
+
             Number[] commonNumbers = new Number[minSize];
+
             for (int i = 0; i < size; i++) {
                 boolean isCommon = false;
                 for (int j = 0; j < ml[0].size; j++) {
@@ -117,6 +121,7 @@ public class MatList<N extends Number> {
 
     public void sortDesc(N value) {
         int index = -1;
+
         for (int i = 0; i < size; i++) {
             if (numbers[i].equals(value)) {
                 index = i;
@@ -183,6 +188,7 @@ public class MatList<N extends Number> {
             System.out.println("MatList is empty");
         } else {
             Number max = numbers[0];
+
             for (int i = 0; i < size; i++) {
                 if (numbers[i].doubleValue() > max.doubleValue()) {
                     max = numbers[i];
@@ -198,6 +204,7 @@ public class MatList<N extends Number> {
             System.out.println("MatList is empty");
         } else {
             Number min = numbers[0];
+
             for (int i = 0; i < size; i++) {
                 if (numbers[i].doubleValue() < min.doubleValue()) {
                     min = numbers[i];
@@ -213,6 +220,7 @@ public class MatList<N extends Number> {
             System.out.println("MatList is empty");
         } else {
             double sum = 0.0;
+
             for (int i = 0; i < size; i++) {
                 sum += numbers[i].doubleValue();
             }
@@ -226,7 +234,9 @@ public class MatList<N extends Number> {
             System.out.println("MatList is empty");
         } else {
             sortAsc();
+
             int median = size / 2;
+
             if (size % 2 == 0) {
                 Number first = numbers[median - 1];
                 Number second = numbers[median];
@@ -240,9 +250,8 @@ public class MatList<N extends Number> {
 
     public N[] toArray() {
         Number[] array = new Number[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = numbers[i];
-        }
+
+        System.arraycopy(numbers, 0, array, 0, size);
         return (N[]) array;
     }
 
@@ -252,21 +261,18 @@ public class MatList<N extends Number> {
         } else {
             int resultSize = lastIndex - firstIndex +1;
             Number[] array = new Number[resultSize];
-            for (int i = 0; i < resultSize; i++) {
-                array[i] = numbers[firstIndex + i];
-            }
+            System.arraycopy(numbers, firstIndex, array, 0, resultSize);
             return (N[]) array;
         }
         return null;
     }
 
-    public MatList<N> cut(int firstIndex, int lastIndex) {
+    public void cut(int firstIndex, int lastIndex) {
         N[] array = toArray(firstIndex, lastIndex);
         MatList<N> result = new MatList<>();
         result.add(array);
         numbers = array;
         size = array.length;
-        return result;
     }
 
     public void clear() {

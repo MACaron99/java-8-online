@@ -9,9 +9,11 @@ public class Manager {
     MatList<Integer> mathList = new MatList<>();
 
     public void start() throws IOException {
+
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         program();
         menu();
+
         String position;
         while ((position = bufferedReader.readLine()) != null) {
             crud(position, bufferedReader);
@@ -23,6 +25,7 @@ public class Manager {
         System.out.println();
         System.out.println(" Your MatList");
         System.out.print("[ ");
+
         for (Number number : numbers) {
             if (number != null) {
                 System.out.print(number + " ");
@@ -35,7 +38,7 @@ public class Manager {
     private void program() {
         System.out.println();
         System.out.println("Program MAT LIST");
-        System.out.println("Welcome to the program MAT LIST. A simple application for statistical analysis of the list.");
+        System.out.println("Welcome to the program MAT LIST. Simple application for statistical analysis of the list.");
     }
 
     private void menu() {
@@ -65,138 +68,183 @@ public class Manager {
     }
 
     private void crud(String position, BufferedReader reader) throws IOException {
+
         switch (position) {
+
             case "1" -> {
                 System.out.println("Please enter the number");
                 int number = Integer.parseInt(reader.readLine());
+
                 mathList.add(number);
+
                 System.out.println("The number has successfully added to the mat list");
             }
+
             case "2" -> {
                 System.out.println("Please enter the numbers");
                 String string = reader.readLine();
-                String[] array = string.split(" ");
-                int[] ints = new int[array.length];
-                for(int i = 0; i < array.length; i++) {
-                    mathList.add(ints[i] = Integer.parseInt(array[i]));
+
+                String[] array = string.split("");
+
+                for (String s : array) {
+                    mathList.add(Integer.parseInt(s));
                 }
                 System.out.println("The numbers have successfully added to the mat list");
             }
-            case "3" -> {
-                print(mathList.findAll());
-            }
+
+            case "3" -> print(mathList.findAll());
+
             case "4" -> {
                 System.out.println("Enter the first index");
                 int firstIndex = Integer.parseInt(reader.readLine());
+
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
+
                 print(mathList.toArray(firstIndex, lastIndex));
             }
+
             case "5" -> {
                 System.out.println();
                 System.out.println("Let's create new mat list: ");
                 System.out.println("Please enter the numbers of the other mat list");
                 String string = reader.readLine();
-                String[] array = string.split(" ");
-                Integer[] ints = new Integer[array.length];
+
+                String[] array = string.split("");
+                Integer[] intArray = new Integer[array.length];
+
                 for(int i = 0; i < array.length; i++) {
-                    ints[i] = Integer.parseInt(array[i]);
+                    intArray[i] = Integer.parseInt(array[i]);
                 }
-                MatList<Integer> otherList = new MatList<>(ints);
+                MatList<Integer> otherList = new MatList<>(intArray);
+
                 mathList.join(otherList);
+
                 System.out.println("Your mat lists are successfully joined");
             }
+
             case "6" -> {
                 System.out.println();
                 System.out.println("Let's create new mat list: ");
                 System.out.println("Please enter the numbers of the other mat list");
                 String string = reader.readLine();
+
                 String[] array = string.split(" ");
-                Integer[] ints = new Integer[array.length];
+                Integer[] intArray = new Integer[array.length];
+
                 for(int i = 0; i < array.length; i++) {
-                    ints[i] = Integer.parseInt(array[i]);
+                    intArray[i] = Integer.parseInt(array[i]);
                 }
-                MatList<Integer> otherList = new MatList<>(ints);
+                MatList<Integer> otherList = new MatList<>(intArray);
+
                 mathList.intersection(otherList);
+
                 System.out.println("Your mat lists are successfully joined leaving common numbers");
             }
+
             case "7" -> {
                 mathList.sortDesc();
+
                 print(mathList.findAll());
             }
+
             case "8" -> {
                 System.out.println("Enter the first index");
                 int firstIndex = Integer.parseInt(reader.readLine());
+
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
+
                 mathList.sortDesc(firstIndex, lastIndex);
+
                 print(mathList.findAll());
             }
+
             case "9" -> {
                 System.out.println("Enter the value");
                 int value = Integer.parseInt(reader.readLine());
+
                 mathList.sortDesc(value);
+
                 print(mathList.findAll());
             }
+
             case "10" -> {
                 mathList.sortAsc();
+
                 print(mathList.findAll());
             }
+
             case "11" -> {
                 System.out.println("Enter the first index");
                 int firstIndex = Integer.parseInt(reader.readLine());
+
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
+
                 mathList.sortAsc(firstIndex, lastIndex);
+
                 print(mathList.findAll());
             }
+
             case "12" -> {
                 System.out.println("Enter the value");
                 int value = Integer.parseInt(reader.readLine());
+
                 mathList.sortAsc(value);
+
                 print(mathList.findAll());
             }
+
             case "13" -> {
                 System.out.println("Enter the index");
                 int index = Integer.parseInt(reader.readLine());
+
                 System.out.println("Your number: " + mathList.get(index));
             }
-            case "14" -> {
-                System.out.println("Max value: " + mathList.getMax());
-            }
-            case "15" -> {
-                System.out.println("Min value: " + mathList.getMin());
-            }
-            case "16" -> {
-                System.out.println("Average value: " + mathList.getAverage());
-            }
-            case "17" -> {
-                System.out.println("Median: " + mathList.getMedian());
-            }
+
+            case "14" -> System.out.println("Max value: " + mathList.getMax());
+
+            case "15" -> System.out.println("Min value: " + mathList.getMin());
+
+            case "16" -> System.out.println("Average value: " + mathList.getAverage());
+
+            case "17" -> System.out.println("Median: " + mathList.getMedian());
 
             case "18" -> {
                 System.out.println("Enter the first index");
                 int firstIndex = Integer.parseInt(reader.readLine());
+
                 System.out.println("Enter the last index");
                 int lastIndex = Integer.parseInt(reader.readLine());
+
                 mathList.cut(firstIndex, lastIndex);
+
                 print(mathList.findAll());
             }
+
             case "19" -> {
                 mathList.clear();
+
                 System.out.println("Cleared");
             }
+
             case "20" -> {
                 System.out.println("Please enter the numbers");
                 String string = reader.readLine();
+
                 String[] array = string.split(" ");
                 Integer[] values = new Integer[array.length];
+
                 for(int i = 0; i < array.length; i++) {
                     values[i] = Integer.parseInt(array[i]);
                 }
+
                 mathList.clear(values);
+
                 System.out.println("Cleared");
             }
+
             case "21" -> {
                 System.out.print("Goodbye!");
                 System.exit(0);
