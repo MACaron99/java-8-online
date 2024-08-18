@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.Set;
 
 public class Dictionary<K, V> {
+
     private final Hashtable<K, V> hashtable;
 
     public Dictionary() {

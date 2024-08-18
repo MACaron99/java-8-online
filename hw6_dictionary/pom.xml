@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>hw_6_dictionary</artifactId>
+    <artifactId>hw6_dictionary</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
