@@ -23,6 +23,7 @@ public class JdbcFactory {
 
     public void initDB(Class<?> mainClass) {
         Map<String, String> map = ResourceUtil.getResources(mainClass.getClassLoader());
+
         try {
             Class.forName(map.get("jdbc.driver"));
             connection = DriverManager.getConnection(

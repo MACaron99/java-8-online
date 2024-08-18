@@ -9,7 +9,8 @@ import org.example.entity.Operation;
 
 public class OperationDaoImpl implements OperationDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
+    private final EntityManagerFactory entityManagerFactory = Persistence.
+            createEntityManagerFactory("jpa-hibernate-mysql");
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override

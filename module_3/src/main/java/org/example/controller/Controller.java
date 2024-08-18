@@ -26,6 +26,7 @@ public class Controller {
         initCategories();
         program();
         mainMenu();
+
         String position;
         while ((position = bufferedReader.readLine()) != null) {
             mainSwitch(position, bufferedReader);
@@ -37,8 +38,10 @@ public class Controller {
         if (categoryService.findById(1L) == null && categoryService.findById(2L) == null) {
             Category category1 = new Category();
             Category category2 = new Category();
+
             category1.setName("Spending(-)");
             category2.setName("Income(+)");
+
             categoryService.create(category1);
             categoryService.create(category2);
         }
@@ -72,50 +75,67 @@ public class Controller {
     }
 
     private void mainSwitch(String position, BufferedReader reader) throws IOException {
+
         switch (position) {
+
             case "1" -> {
                 editorMenu();
+
                 String choice;
                 while ((choice = reader.readLine()) != null) {
                     editorSwitch(choice, reader);
                     editorMenu();
                 }
             }
+
             case "2" -> {
                 Collection<User> users = userService.findAll();
+
                 if (CollectionUtils.isNotEmpty(users)) {
                     printUsersAndAccounts(users);
+
                     System.out.println("Enter sender account id");
                     Account account1 = accountService.findById(Long.valueOf(reader.readLine()));
+
                     if (account1 != null) {
                         if (!account1.isBlock()) {
                             System.out.println("Enter receiver account id");
                             Account account2 = accountService.findById(Long.valueOf(reader.readLine()));
+
                             if (account2 != null) {
                                 if (!account2.isBlock()) {
                                     System.out.println("Enter the sum to sent");
                                     long sum = Long.parseLong(reader.readLine());
+
                                     if (sum < account1.getSum()) {
                                         account1.setSum(account1.getSum() - sum);
                                         account2.setSum(account2.getSum() + sum);
+
                                         Operation operation = new Operation();
-                                        History history1 = new History();
-                                        History history2 = new History();
+
                                         operation.setDateTime(String.valueOf(LocalDateTime.now()));
                                         operation.setAccount1(account1);
                                         operation.setAccount2(account2);
                                         operation.setSum(sum);
+
                                         operationService.create(operation);
+
+                                        History history1 = new History();
+                                        History history2 = new History();
+
                                         history1.setAccount(account1);
                                         history1.setOperation(operation);
                                         history1.setCategory(categoryService.findById(1L));
+
                                         history2.setAccount(account2);
                                         history2.setOperation(operation);
                                         history2.setCategory(categoryService.findById(2L));
+
                                         historyService.create(history1);
                                         historyService.create(history2);
                                         accountService.update(account1);
                                         accountService.update(account2);
+
                                         System.out.println("Operation successfully completed");
                                     } else {
                                         System.out.println("Not enough sum on account");
@@ -136,14 +156,19 @@ public class Controller {
                     System.out.println("No user found");
                 }
             }
+
             case "3" -> {
                 Collection<User> users = userService.findAll();
+
                 if (CollectionUtils.isNotEmpty(users)) {
                     printUsersAndAccounts(users);
+
                     System.out.println("Enter account id");
                     Long id = Long.valueOf(reader.readLine());
+
                     if (accountService.findById(id) != null) {
                         CsvUtil.getHistory(id);
+
                         System.out.println();
                         System.out.println("An account extract issued");
                     } else {
@@ -161,29 +186,41 @@ public class Controller {
     }
 
     private void editorSwitch(String choice, BufferedReader reader) throws IOException {
+
         switch (choice) {
+
             case "1" -> {
                 User user = new User();
                 System.out.println("Enter user name");
                 user.setName(reader.readLine());
+
                 userService.create(user);
+
                 System.out.println("User has been created");
             }
+
             case "2" -> {
                 Collection<User> users = userService.findAll();
+
                 if (CollectionUtils.isNotEmpty(users)) {
                     printUsersAndAccounts(users);
+
                     System.out.println("Enter user id");
                     User user = userService.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (user != null) {
                         Account account = new Account();
+
                         System.out.println("Enter initial account sum");
                         account.setSum(Long.valueOf(reader.readLine()));
+
                         account.setUser(user);
                         user.getAccounts().add(account);
+
                         accountService.create(account);
                         userService.update(user);
+
                         System.out.println("User '" + user.getName() + "' received new account # " + account.getId());
                     } else {
                         System.out.println("User not found");
@@ -192,8 +229,10 @@ public class Controller {
                     System.out.println("No user found");
                 }
             }
+
             case "3" -> {
                 Collection<User> users = userService.findAll();
+
                 if (CollectionUtils.isNotEmpty(users)) {
                     printUsersAndAccounts(users);
                 } else {
@@ -202,15 +241,20 @@ public class Controller {
             }
             case "4" -> {
                 Collection<User> users = userService.findAll();
+
                 if (CollectionUtils.isNotEmpty(users)) {
                     printUsersAndAccounts(users);
+
                     System.out.println("Enter user id");
                     User user = userService.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (user != null) {
                         System.out.println("Enter user name");
                         user.setName(reader.readLine());
+
                         userService.update(user);
+
                         System.out.println("User has been updated");
                     } else {
                         System.out.println("User not found");
@@ -219,16 +263,22 @@ public class Controller {
                     System.out.println("No user found");
                 }
             }
+
             case "5" -> {
                 Collection<User> users = userService.findAll();
+
                 if (CollectionUtils.isNotEmpty(users)) {
                     printUsersAndAccounts(users);
+
                     System.out.println("Enter account id");
                     Account account = accountService.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (account != null) {
                         account.setBlock(true);
+
                         accountService.update(account);
+
                         System.out.println("Account has been blocked");
                     } else {
                         System.out.println("Account not found");
@@ -237,17 +287,23 @@ public class Controller {
                     System.out.println("No user found");
                 }
             }
+
             case "6" -> {
                 Collection<User> users = userService.findAll();
+
                 if (CollectionUtils.isNotEmpty(users)) {
                     printUsersAndAccounts(users);
+
                     System.out.println("Enter account id");
                     Account account = accountService.findById(Long.valueOf(reader.readLine()));
                     System.out.println();
+
                     if (account != null) {
                         if (account.isBlock()) {
                             account.setBlock(false);
+
                             accountService.update(account);
+
                             System.out.println("Account has been unblocked");
                         } else {
                             System.out.println("Account is not blocked");
@@ -259,9 +315,12 @@ public class Controller {
                     System.out.println("No user found");
                 }
             }
+
             case "0" -> {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
                 mainMenu();
+
                 String position;
                 while ((position = bufferedReader.readLine()) != null) {
                     mainSwitch(position, bufferedReader);
@@ -276,12 +335,16 @@ public class Controller {
             System.out.println("User");
             System.out.println("id = " + user.getId());
             System.out.println("name = " + user.getName());
+
             Set<Account> accounts = user.getAccounts();
+
             if (CollectionUtils.isNotEmpty(accounts)) {
                 System.out.println("Accounts:");
+
                 for (Account account : accounts) {
                     System.out.println("id = " + account.getId());
                     System.out.println("sum = " + account.getSum());
+
                     if (account.isBlock()) {
                         System.out.println("blocked");
                     }

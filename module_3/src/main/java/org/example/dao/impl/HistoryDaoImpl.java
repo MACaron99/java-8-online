@@ -8,7 +8,8 @@ import org.example.entity.History;
 
 public class HistoryDaoImpl implements HistoryDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
+    private final EntityManagerFactory entityManagerFactory = Persistence.
+            createEntityManagerFactory("jpa-hibernate-mysql");
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override

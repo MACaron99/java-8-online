@@ -10,7 +10,8 @@ import java.util.Collection;
 
 public class AccountDaoImpl implements AccountDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
+    private final EntityManagerFactory entityManagerFactory = Persistence.
+            createEntityManagerFactory("jpa-hibernate-mysql");
     private final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override

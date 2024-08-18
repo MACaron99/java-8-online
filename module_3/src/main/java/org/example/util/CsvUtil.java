@@ -26,8 +26,10 @@ public final class CsvUtil {
 
     private static Collection<History> findByAccountId(Long id) {
         Collection<History> histories = new ArrayList<>();
+
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement("select * from histories where account_id = " + id)) {
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 History history = new History();
                 history.setId(rs.getLong("id"));
@@ -44,6 +46,7 @@ public final class CsvUtil {
     private static void writeCsv(Collection<History> histories) {
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter("history.csv"))) {
             List<String[]> list = new ArrayList<>();
+
             for (History history : histories) {
                 String[] strings = new String[] {
                         history.getOperation().getDateTime(),
@@ -64,6 +67,7 @@ public final class CsvUtil {
     private static Account findAccountById(Long id) {
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement("select * from accounts where id = " + id)) {
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 Account account = new Account();
                 account.setId(rs.getLong("id"));
@@ -78,6 +82,7 @@ public final class CsvUtil {
     private static Operation findOperationById(Long id) {
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement("select * from operations where id = " + id)) {
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 Operation operation = new Operation();
                 operation.setDateTime(rs.getString("date_time"));
@@ -95,6 +100,7 @@ public final class CsvUtil {
     private static Category findCategoryById(Long id) {
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement("select * from categories where id = " + id)) {
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 Category category = new Category();
                 category.setName(rs.getString("name"));
