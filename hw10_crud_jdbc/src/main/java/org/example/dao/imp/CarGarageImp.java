@@ -1,7 +1,7 @@
 package org.example.dao.imp;
 
-import org.example.dao.ParkGarage;
-import org.example.entity.Park;
+import org.example.dao.CarGarage;
+import org.example.entity.Car;
 import org.example.factory.JdbcFactory;
 
 import java.sql.PreparedStatement;
@@ -10,21 +10,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ParkGarageImp implements ParkGarage {
+public class CarGarageImp implements CarGarage {
 
     private final JdbcFactory jdbcFactory = JdbcFactory.getInstance();
 
-    private static final String CREATE = "insert into parks values (default, ?)";
-    private static final String UPDATE = "update parks set name = ? where id = ?";
-    private static final String DELETE = "delete from parks where id = ?";
-    private static final String EXISTS = "select count(id) as count_of_parks from parks where id = ";
-    private static final String FIND_ALL = "select * from parks";
-    private static final String FIND_MANY = "select * from parks where id in (";
+    private static final String CREATE = "insert into cars values (default, ?, ?, ?)";
+    private static final String UPDATE = "update cars set brand = ?, model = ?, age = ? where id = ?";
+    private static final String DELETE = "delete from cars where id = ?";
+    private static final String EXISTS = "select count(id) as count_of_cars from cars where id = ";
+    private static final String FIND_ALL = "select * from cars";
+    private static final String FIND_MANY = "select * from cars where id in (";
 
     @Override
-    public void create(Park park) {
+    public void create(Car car) {
         try(PreparedStatement ps = jdbcFactory.getConnection().prepareStatement(CREATE)) {
-            ps.setString(1, park.getParkName());
+            ps.setString(1, car.getCarBrand());
+            ps.setString(2, car.getCarModel());
+            ps.setInt(3, car.getCarYear());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -32,10 +34,12 @@ public class ParkGarageImp implements ParkGarage {
     }
 
     @Override
-    public void update(Park park) {
+    public void update(Car car) {
         try(PreparedStatement ps = jdbcFactory.getConnection().prepareStatement(UPDATE)) {
-            ps.setString(1, park.getParkName());
-            ps.setLong(4, park.getId());
+            ps.setString(1, car.getCarBrand());
+            ps.setString(2, car.getCarModel());
+            ps.setInt(3, car.getCarYear());
+            ps.setLong(4, car.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
@@ -57,7 +61,7 @@ public class ParkGarageImp implements ParkGarage {
         try(PreparedStatement ps = jdbcFactory.getConnection().prepareStatement(EXISTS + id)) {
             ResultSet rs = ps.executeQuery();
             rs.next();
-            long count = rs.getLong("count_of_parks");
+            long count = rs.getLong("count_of_cars");
             return count == 1;
         } catch (SQLException e) {
             System.out.println("e = " + e.getMessage());
@@ -66,48 +70,57 @@ public class ParkGarageImp implements ParkGarage {
     }
 
     @Override
-    public Collection<Park> findAll() {
-        Collection<Park> parks = new ArrayList<>();
+    public Collection<Car> findAll() {
+        Collection<Car> cars = new ArrayList<>();
+
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement(FIND_ALL)) {
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
-                parks.add(generate(rs));
+                cars.add(generate(rs));
             }
-            return parks;
+            return cars;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public Collection<Park> findMany(Long[] ids) {
+    public Collection<Car> findMany(Long[] ids) {
         StringBuilder sb = new StringBuilder(FIND_MANY);
+
         for (int i = 0; i < ids.length; i++) {
             sb.append("?");
+
             if (i < ids.length - 1) {
                 sb.append(", ");
             }
         }
         sb.append(")");
-        Collection<Park> parks = new ArrayList<>();
+
+        Collection<Car> cars = new ArrayList<>();
+
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement(sb.toString())) {
             for (int i = 0; i < ids.length; i++) {
                 ps.setLong(i + 1, ids[i]);
             }
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                parks.add(generate(rs));
+                cars.add(generate(rs));
             }
-            return parks;
+            return cars;
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    private Park generate(ResultSet rs) throws SQLException {
-        Park park = new Park();
-        park.setId(rs.getLong("id"));
-        park.setParkName(rs.getString("name"));
-        return park;
+    private Car generate(ResultSet rs) throws SQLException {
+        Car car = new Car();
+        car.setId(rs.getLong("id"));
+        car.setCarBrand(rs.getString("brand"));
+        car.setCarModel(rs.getString("model"));
+        car.setCarYear(rs.getInt("age"));
+        return car;
     }
 }

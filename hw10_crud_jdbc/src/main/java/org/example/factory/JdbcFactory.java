@@ -25,10 +25,12 @@ public class JdbcFactory {
         Map<String, String> map = ResourceUtil.getResources(mainClass.getClassLoader());
         try {
             Class.forName(map.get("jdbc.driver"));
+
             connection = DriverManager.getConnection(
                     map.get("jdbc.url"),
                     map.get("jdbc.user"),
                     map.get("jdbc.password"));
+
             statement = connection.createStatement();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

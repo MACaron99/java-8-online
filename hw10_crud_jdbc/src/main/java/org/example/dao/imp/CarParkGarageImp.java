@@ -69,8 +69,10 @@ public class CarParkGarageImp implements CarParkGarage<CarPark> {
     @Override
     public Collection<CarPark> findByCarId(Long id) {
         Collection<CarPark> carParks = new ArrayList<>();
+
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement(FIND_BY_CAR_ID + id)) {
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 carParks.add(generate(rs));
             }
@@ -83,8 +85,10 @@ public class CarParkGarageImp implements CarParkGarage<CarPark> {
     @Override
     public Collection<CarPark> findByParkId(Long id) {
         Collection<CarPark> carParks = new ArrayList<>();
+
         try (PreparedStatement ps = jdbcFactory.getConnection().prepareStatement(FIND_BY_PARK_ID + id)) {
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 carParks.add(generate(rs));
             }

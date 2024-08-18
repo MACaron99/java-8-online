@@ -25,6 +25,7 @@ public class Manager {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         program();
         menu();
+
         String position;
         while ((position = bufferedReader.readLine()) != null) {
             crud(position, bufferedReader);
@@ -56,34 +57,47 @@ public class Manager {
     }
 
     private void crud(String position, BufferedReader reader) throws IOException {
+
         switch (position) {
+
             case "1" -> {
                 carMechanic.create(setCar(reader));
                 System.out.println("Car has been created");
             }
+
             case "2" -> {
                 parkMechanic.create(setPark(reader));
                 System.out.println("Park has been created");
             }
+
             case "3" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (!cars.isEmpty()) {
                     printCars(cars);
+
                     CarPark carPark = new CarPark();
                     System.out.println("Please enter car id");
                     Long carId = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     if (carMechanic.exists(carId)) {
                         carPark.setCarId(carId);
+
                         Collection<Park> parks = parkMechanic.findAll();
+
                         if (!parks.isEmpty()) {
                             printParks(parks);
+
                             System.out.println("Please enter park id");
                             Long parkId = Long.valueOf(reader.readLine());
                             System.out.println();
+
                             if (parkMechanic.exists(parkId)) {
                                 carPark.setParkId(parkId);
+
                                 carParkMechanic.create(carPark);
+
                                 System.out.println("Сar has been added to park");
                             } else {
                                 System.out.println("Park not found");
@@ -98,31 +112,40 @@ public class Manager {
                     System.out.println("No car found");
                 }
             }
+
             case "4" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (!cars.isEmpty()) {
                     printCars(cars);
                 } else {
                     System.out.println("No car found");
                 }
             }
+
             case "5" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (!parks.isEmpty()) {
                     printParks(parks);
                 } else {
                     System.out.println("No park found");
                 }
             }
+
             case "6" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (!parks.isEmpty()) {
                     printParks(parks);
+
                     System.out.println("Please enter park id");
                     Long parkId = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     if (parkMechanic.exists(parkId)) {
                         Collection<CarPark> carParks = carParkMechanic.findByParkId(parkId);
+
                         if (!carParks.isEmpty()) {
                             printCars(carMechanic.findMany(carParks.stream().map(CarPark::getCarId).toArray(Long[]::new)));
                         } else {
@@ -135,17 +158,23 @@ public class Manager {
                     System.out.println("No park found");
                 }
             }
+
             case "7" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (!cars.isEmpty()) {
                     printCars(cars);
+
                     System.out.println("Please enter car id");
                     Long carId = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     if (carMechanic.exists(carId)) {
                         Car car = setCar(reader);
                         car.setId(carId);
+
                         carMechanic.update(car);
+
                         System.out.println("Car has been updated");
                     } else {
                         System.out.println("Car not found");
@@ -154,17 +183,23 @@ public class Manager {
                     System.out.println("No car found");
                 }
             }
+
             case "8" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (!parks.isEmpty()) {
                     printParks(parks);
+
                     System.out.println("Please enter park id");
                     Long parkId = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     if (parkMechanic.exists(parkId)) {
                         Park park = setPark(reader);
                         park.setId(parkId);
+
                         parkMechanic.update(park);
+
                         System.out.println("Park has been updated");
                     } else {
                         System.out.println("Park not found");
@@ -173,13 +208,17 @@ public class Manager {
                     System.out.println("No park found");
                 }
             }
+
             case "9" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (!cars.isEmpty()) {
                     printCars(cars);
+
                     System.out.println("Please enter car id");
                     Long carId = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     if (carMechanic.exists(carId)) {
                         if (carParkMechanic.findOneByCarId(carId) != null) {
                             carParkMechanic.deleteByCarId(carId);
@@ -193,13 +232,17 @@ public class Manager {
                     System.out.println("No car found");
                 }
             }
+
             case "10" -> {
                 Collection<Park> parks = parkMechanic.findAll();
+
                 if (!parks.isEmpty()) {
                     printParks(parks);
+
                     System.out.println("Please enter park id");
                     Long parkId = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     if (parkMechanic.exists(parkId)) {
                         if (carParkMechanic.findOneByParkId(parkId) != null) {
                             carParkMechanic.deleteByParkId(parkId);
@@ -213,24 +256,34 @@ public class Manager {
                     System.out.println("No park found");
                 }
             }
+
             case "11" -> {
                 Collection<Car> cars = carMechanic.findAll();
+
                 if (!cars.isEmpty()) {
                     printCars(cars);
+
                     System.out.println("Please enter car id");
                     Long carId = Long.valueOf(reader.readLine());
                     System.out.println();
+
                     if (carMechanic.exists(carId)) {
                         Collection<CarPark> carParks = carParkMechanic.findByCarId(carId);
+
                         if (!carParks.isEmpty()) {
-                            printParks(parkMechanic.findMany(carParks.stream().map(CarPark::getParkId).toArray(Long[]::new)));
+                            printParks(parkMechanic.findMany(carParks.stream()
+                                    .map(CarPark::getParkId).toArray(Long[]::new)));
+
                             System.out.println("Please enter park id");
                             Long parkId = Long.valueOf(reader.readLine());
                             System.out.println();
+
                             if (parkMechanic.exists(parkId)) {
                                 CarPark carPark = carParkMechanic.findByCarAndParkId(carId, parkId);
+
                                 if (carPark != null) {
                                     carParkMechanic.deleteByCarAndParkId(carId, parkId);
+
                                     System.out.println("Car has been deleted from park");
                                 } else {
                                     System.out.println("This car hasn't been added to this park");
@@ -277,19 +330,25 @@ public class Manager {
 
     private Car setCar(BufferedReader reader) throws IOException {
         Car car = new Car();
+
         System.out.println("Please enter car brand");
         car.setCarBrand(reader.readLine());
+
         System.out.println("Please enter car model");
         car.setCarModel(reader.readLine());
+
         System.out.println("Please enter car year");
         car.setCarYear(Integer.parseInt(reader.readLine()));
+
         return car;
     }
 
     private Park setPark(BufferedReader reader) throws IOException {
         Park park = new Park();
+
         System.out.println("Please enter park name");
         park.setParkName(reader.readLine());
+
         return park;
     }
 }
