@@ -48,15 +48,21 @@ public class CarServiceImpl implements CarService {
     @Override
     public Page<Car> findAll(PageRequestDto pageRequestDto) {
         Specification<Car> specification = null;
+
         Map<String, Object> map = pageRequestDto.getParamMap();
+
         if (MapUtils.isNotEmpty(map)) {
             Long parkId = (Long) map.get("parkId");
+
             specification = (root, query, cb) -> {
                 Join<Park, Car> parkCarJoin = root.join("parks");
+
                 return cb.equal(parkCarJoin.get("id"), parkId);
             };
         }
+
         PageRequest pageRequest;
+
         if (pageRequestDto.getSortType().equals("desc")) {
             pageRequest = PageRequest.of(
                     pageRequestDto.getPage() - 1,
@@ -68,9 +74,11 @@ public class CarServiceImpl implements CarService {
                     pageRequestDto.getSize(),
                     Sort.by(pageRequestDto.getSortBy()).ascending());
         }
+
         if (specification != null) {
             return carRepository.findAll(specification, pageRequest);
         }
+
         return carRepository.findAll(pageRequest);
     }
 

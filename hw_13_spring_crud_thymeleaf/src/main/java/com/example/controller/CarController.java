@@ -26,7 +26,9 @@ public class CarController {
     @GetMapping
     public String allCars(Model model, WebRequest request) {
         Map<String, Object> map = new HashMap<>();
+
         String parkIdParameter = request.getParameter("parkId");
+
         if (StringUtils.isNotBlank(parkIdParameter)) {
             Long parkId = Long.parseLong(parkIdParameter);
             map.put("parkId", parkId);
@@ -65,6 +67,7 @@ public class CarController {
     @GetMapping("/update/{id}")
     public String redirectToUpdateCar(@PathVariable Long id, Model model) {
         CarResponseDto car = carFacade.findById(id);
+
         model.addAttribute("car", car);
         return "pages/cars/car_update";
     }

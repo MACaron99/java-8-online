@@ -41,6 +41,7 @@ public class ParkServiceImpl implements ParkService {
     @Override
     public Page<Park> findAll(PageRequestDto pageRequestDto) {
         PageRequest pageRequest;
+
         if (pageRequestDto.getSortType().equals("desc")) {
             pageRequest = PageRequest.of(
                     pageRequestDto.getPage() - 1,
@@ -52,6 +53,7 @@ public class ParkServiceImpl implements ParkService {
                     pageRequestDto.getSize(),
                     Sort.by(pageRequestDto.getSortBy()).ascending());
         }
+
         return parkRepository.findAll(pageRequest);
     }
 }

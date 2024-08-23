@@ -23,7 +23,9 @@ public class CarResponseDto extends BaseResponseDto {
         setCarBrand(car.getCarBrand());
         setCarModel(car.getCarModel());
         setCarYear(car.getCarYear());
+
         Set<Park> parks = car.getParks();
+
         if (CollectionUtils.isNotEmpty(parks)) {
             setParkInfoList(parks.stream().map(ParkInfo::new).toList());
         }

@@ -23,17 +23,23 @@ public class JoinFacadeImpl implements JoinFacade {
     @Override
     public List<Car> findAvailableCars(Long id) {
         Park park = parkService.findById(id);
+
         Set<Car> cars = park.getCars();
+
         Collection<Car> allCars = carService.findAll();
+
         return allCars.stream().filter(car -> !cars.contains(car)).collect(Collectors.toList());
     }
 
     @Override
     public void add(Long parkId, Long carId) {
         Car car = carService.findById(carId);
+
         Park park = parkService.findById(parkId);
+
         if (car != null && park != null) {
             park.getCars().add(car);
+
             parkService.update(park);
         }
     }
@@ -41,8 +47,11 @@ public class JoinFacadeImpl implements JoinFacade {
     @Override
     public void remove(Long parkId, Long carId) {
         Park park = parkService.findById(parkId);
+
         Set<Car> cars = park.getCars();
+
         cars.removeIf(car -> car.getId().equals(carId));
+
         parkService.update(park);
     }
 }

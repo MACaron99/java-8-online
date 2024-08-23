@@ -28,14 +28,18 @@ public class ParkFacadeImpl implements ParkFacade {
     @Override
     public void create(ParkRequestDto parkRequestDto) {
         Park park = new Park();
+
         park.setName(parkRequestDto.getParkName());
+
         parkService.create(park);
     }
 
     @Override
     public void update(ParkRequestDto parkRequestDto, Long id) {
         Park park = parkService.findById(id);
+
         park.setName(parkRequestDto.getParkName());
+
         parkService.update(park);
     }
 
@@ -53,7 +57,9 @@ public class ParkFacadeImpl implements ParkFacade {
     public PageResponseDto<ParkResponseDto> findAll(WebRequest webRequest, Map<String, Object> paramMap) {
         PageResponseDto<ParkResponseDto> pageResponseDto = new PageResponseDto<>();
         PageRequestDto pageRequestDto = WebRequestUtil.generatePageRequestDto(webRequest);
+
         Page<Park> page = parkService.findAll(pageRequestDto);
+
         pageResponseDto.setCurrentPage(pageRequestDto.getPage());
         pageResponseDto.setPageSize(page.getSize());
         pageResponseDto.setTotalPages(page.getTotalPages());
@@ -64,12 +70,17 @@ public class ParkFacadeImpl implements ParkFacade {
         pageResponseDto.setHasPrevious(page.hasPrevious());
         pageResponseDto.setSortBy(pageRequestDto.getSortBy());
         pageResponseDto.setSortType(pageRequestDto.getSortType());
+
         Collection<ParkResponseDto> items = Collections.emptyList();
+
         List<Park> parks = page.getContent();
+
         if (CollectionUtils.isNotEmpty(parks)) {
             items = parks.stream().map(ParkResponseDto::new).toList();
         }
+
         pageResponseDto.setItems(items);
+
         return pageResponseDto;
     }
 }

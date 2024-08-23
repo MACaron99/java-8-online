@@ -18,7 +18,9 @@ public class ParkResponseDto extends BaseResponseDto {
     public ParkResponseDto(Park park) {
         setId(park.getId());
         setParkName(park.getName());
+
         Set<Car> cars = park.getCars();
+
         if (CollectionUtils.isNotEmpty(cars)) {
             setCountOfCars(cars.size());
         }

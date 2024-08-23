@@ -28,18 +28,22 @@ public class CarFacadeImpl implements CarFacade {
     @Override
     public void create(CarRequestDto carRequestDto) {
         Car car = new Car();
+
         car.setCarBrand(carRequestDto.getCarBrand());
         car.setCarModel(carRequestDto.getCarModel());
         car.setCarYear(carRequestDto.getCarYear());
+
         carService.create(car);
     }
 
     @Override
     public void update(CarRequestDto carRequestDto, Long id) {
         Car car = carService.findById(id);
+
         car.setCarBrand(carRequestDto.getCarBrand());
         car.setCarModel(carRequestDto.getCarModel());
         car.setCarYear(carRequestDto.getCarYear());
+
         carService.update(car);
     }
 
@@ -58,7 +62,9 @@ public class CarFacadeImpl implements CarFacade {
         PageResponseDto<CarResponseDto> pageResponseDto = new PageResponseDto<>();
         PageRequestDto pageRequestDto = WebRequestUtil.generatePageRequestDto(webRequest);
         pageRequestDto.setParamMap(paramMap);
+
         Page<Car> page = carService.findAll(pageRequestDto);
+
         pageResponseDto.setCurrentPage(pageRequestDto.getPage());
         pageResponseDto.setPageSize(page.getSize());
         pageResponseDto.setTotalPages(page.getTotalPages());
@@ -69,11 +75,15 @@ public class CarFacadeImpl implements CarFacade {
         pageResponseDto.setHasPrevious(page.hasPrevious());
         pageResponseDto.setSortBy(pageRequestDto.getSortBy());
         pageResponseDto.setSortType(pageRequestDto.getSortType());
+
         Collection<CarResponseDto> items = Collections.emptyList();
+
         List<Car> cars = page.getContent();
+
         if (CollectionUtils.isNotEmpty(cars)) {
             items = cars.stream().map(CarResponseDto::new).toList();
         }
+
         pageResponseDto.setItems(items);
         return pageResponseDto;
     }
