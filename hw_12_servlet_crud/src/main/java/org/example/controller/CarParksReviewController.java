@@ -20,6 +20,7 @@ public class CarParksReviewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(200);
+
         try (PrintWriter printWriter = resp.getWriter()) {
             printWriter.write("<!DOCTYPE html>");
             printWriter.write("<html lang=\"en\">");
@@ -35,9 +36,12 @@ public class CarParksReviewController extends HttpServlet {
             printWriter.write("<th>Id</th>");
             printWriter.write("<th>Name</th>");
             printWriter.write("</tr>");
+
             Optional<Car> optionalCar = carService.findById(Long.valueOf(req.getParameter("carId")));
+
             if (optionalCar.isPresent()) {
                 Car car = optionalCar.get();
+
                 for (Park park : car.getParks()) {
                     printWriter.write("<tr>");
                     printWriter.write("<td>");

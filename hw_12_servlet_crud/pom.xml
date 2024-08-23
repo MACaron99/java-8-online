@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <lombok.version>1.18.30</lombok.version>
-        <mysql-connector-j.version>8.0.33</mysql-connector-j.version>
+        <mysql-connector-j.version>8.2.0</mysql-connector-j.version>
         <hibernate-core-jakarta.version>5.6.15.Final</hibernate-core-jakarta.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <commons-collections4.version>4.4</commons-collections4.version>

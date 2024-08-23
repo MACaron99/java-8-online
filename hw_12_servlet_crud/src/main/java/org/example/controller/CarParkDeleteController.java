@@ -20,11 +20,14 @@ public class CarParkDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Optional<Park> optionalPark = parkService.findById(Long.valueOf(req.getParameter("parkId")));
+
         if (optionalPark.isPresent()) {
             System.out.println(req.getParameter("carId") + " " + req.getParameter("parkId"));
+
             Park park = optionalPark.get();
             Set<Car> cars = park.getCars();
             cars.removeIf(car -> car.getId().equals(Long.parseLong(req.getParameter("carId"))));
+
             parkService.update(park);
         }
         resp.sendRedirect("park-cars?parkId=" + req.getParameter("parkId"));

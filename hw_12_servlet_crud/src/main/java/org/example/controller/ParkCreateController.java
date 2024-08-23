@@ -19,6 +19,7 @@ public class ParkCreateController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         resp.setStatus(200);
+
         try (PrintWriter printWriter = resp.getWriter()) {
             printWriter.write("<!DOCTYPE html>");
             printWriter.write("<html lang='en'>");
@@ -41,14 +42,18 @@ public class ParkCreateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setStatus(201);
+
         Map<String, String[]> parameterMap = req.getParameterMap();
+
         if (MapUtils.isNotEmpty(parameterMap)) {
             Park park = new Park();
+
             parameterMap.forEach((k, v) -> {
                 if (k.equals("parkName")) {
                     park.setName(v[0]);
                 }
             });
+
             parkService.create(park);
         }
         resp.sendRedirect("parks");

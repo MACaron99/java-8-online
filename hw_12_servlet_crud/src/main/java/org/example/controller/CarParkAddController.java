@@ -27,6 +27,7 @@ public class CarParkAddController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(200);
+
         try (PrintWriter printWriter = resp.getWriter()) {
             printWriter.write("<!DOCTYPE html>");
             printWriter.write("<html lang='en'>");
@@ -38,17 +39,24 @@ public class CarParkAddController extends HttpServlet {
             printWriter.write("Choose the car");
             printWriter.write("</h1>");
             printWriter.write("<form method='post' action='/hw_12_servlet_crud/car-park-add'>");
+
             Optional<Park> optionalPark = parkService.findById(Long.parseLong(req.getParameter("parkId")));
+
             if (optionalPark.isPresent()) {
                 Park park = optionalPark.get();
+
                 Collection<Car> cars = carService.findAll();
+
                 if (CollectionUtils.isNotEmpty(cars)) {
                     printWriter.write("<label for='id'>Choose the car:</label>");
                     printWriter.write("<select id='id' name='carId'>");
+
                     Set<Car> cars1 = park.getCars();
+
                     if (CollectionUtils.isNotEmpty(cars1)) {
                         for (Car car : cars) {
                             boolean contains = false;
+
                             for (Car car1 : cars1) {
                                 if (Objects.equals(car.getId(), car1.getId())) {
                                     contains = true;
@@ -56,12 +64,14 @@ public class CarParkAddController extends HttpServlet {
                                 }
                             }
                             if (!contains) {
-                                printWriter.write("<option value='" + car.getId() + "'>" + car.getCarBrand() + " " + car.getCarModel() + " " + car.getCarYear() + "</option>");
+                                printWriter.write("<option value='" + car.getId() + "'>" + car.getCarBrand() + " "
+                                        + car.getCarModel() + " " + car.getCarYear() + "</option>");
                             }
                         }
                     } else {
                         for (Car car : cars) {
-                            printWriter.write("<option value='" + car.getId() + "'>" + car.getCarBrand() + " " + car.getCarModel() + " " + car.getCarYear() + "</option>");
+                            printWriter.write("<option value='" + car.getId() + "'>" + car.getCarBrand() + " "
+                                    + car.getCarModel() + " " + car.getCarYear() + "</option>");
 
                         }
                     }
@@ -81,13 +91,18 @@ public class CarParkAddController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
         resp.setStatus(201);
+
         Optional<Park> optionalPark = parkService.findById(Long.parseLong(req.getParameter("parkId")));
+
         if (optionalPark.isPresent()) {
             Park park = optionalPark.get();
+
             Optional<Car> optionalCar = carService.findById(Long.parseLong(req.getParameter("carId")));
+
             if (optionalCar.isPresent()) {
                 Car car = optionalCar.get();
                 park.getCars().add(car);
+
                 parkService.update(park);
             }
         }

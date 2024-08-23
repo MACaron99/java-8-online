@@ -20,6 +20,7 @@ public class ParkCarsReviewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(200);
+
         try (PrintWriter printWriter = resp.getWriter()) {
             printWriter.write("<!DOCTYPE html>");
             printWriter.write("<html lang='en'>");
@@ -37,30 +38,42 @@ public class ParkCarsReviewController extends HttpServlet {
             printWriter.write("<th>Model</th>");
             printWriter.write("<th>Year</th>");
             printWriter.write("<th></th>");
+
             Optional<Park> optionalPark = parkService.findById(Long.valueOf(req.getParameter("parkId")));
+
             if (optionalPark.isPresent()) {
                 Park park = optionalPark.get();
+
                 printWriter.write("<td>");
-                printWriter.write("<a href=\"/hw_12_servlet_crud/car-park-add?parkId=" + park.getId() + "\">Add car</a>");
+                printWriter.write("<a href=\"/hw_12_servlet_crud/car-park-add?parkId=" + park.getId()
+                        + "\">Add car</a>");
                 printWriter.write("</td>");
                 printWriter.write("</tr>");
+
                 for (Car car : park.getCars()) {
                     printWriter.write("<tr>");
+
                     printWriter.write("<td>");
                     printWriter.write(String.valueOf(car.getId()));
                     printWriter.write("</td>");
+
                     printWriter.write("<td>");
                     printWriter.write(car.getCarBrand());
                     printWriter.write("</td>");
+
                     printWriter.write("<td>");
                     printWriter.write(car.getCarModel());
                     printWriter.write("</td>");
+
                     printWriter.write("<td>");
                     printWriter.write(Integer.toString(car.getCarYear()));
                     printWriter.write("</td>");
+
                     printWriter.write("<td>");
-                    printWriter.write("<a href=\"/hw_12_servlet_crud/car-park-delete?carId=" + car.getId() + "&parkId=" + park.getId() + "\">retire</a>");
+                    printWriter.write("<a href=\"/hw_12_servlet_crud/car-park-delete?carId=" + car.getId()
+                            + "&parkId=" + park.getId() + "\">retire</a>");
                     printWriter.write("</td>");
+
                     printWriter.write("</tr>");
                 }
             }

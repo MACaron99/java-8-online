@@ -18,9 +18,12 @@ public class ParkUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Optional<Park> optionalPark = parkService.findById(Long.parseLong(req.getParameter("parkId")));
+
         if (optionalPark.isPresent()) {
             Park park = optionalPark.get();
+
             resp.setStatus(200);
+
             try(PrintWriter printWriter = resp.getWriter()) {
                 printWriter.write("<!DOCTYPE html>");
                 printWriter.write("<html lang='en'>");
@@ -30,8 +33,10 @@ public class ParkUpdateController extends HttpServlet {
                 printWriter.write("</h1>");
                 printWriter.write("<form method='post' action='/hw_12_servlet_crud/parks-update'>");
                 printWriter.write("<label for='name'>Park name:</label><br>");
-                printWriter.write("<input type='text' id='name' name='parkName' value='" + park.getName() + "'/><br><br>");
-                printWriter.write("<input type='hidden' id='id' name='parkId' value='" + park.getId() + "'/>");
+                printWriter.write("<input type='text' id='name' name='parkName' value='" +
+                        park.getName() + "'/><br><br>");
+                printWriter.write("<input type='hidden' id='id' name='parkId' value='" +
+                        park.getId() + "'/>");
                 printWriter.write("<input type='submit' value='Update'/>");
                 printWriter.write("</form>");
                 printWriter.write("</body>");
@@ -47,9 +52,11 @@ public class ParkUpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Optional<Park> optionalPark = parkService.findById(Long.parseLong(req.getParameter("parkId")));
+
         if (optionalPark.isPresent()) {
             Park park = optionalPark.get();
             park.setName(req.getParameter("parkName"));
+
             parkService.update(park);
         }
         resp.sendRedirect("parks");

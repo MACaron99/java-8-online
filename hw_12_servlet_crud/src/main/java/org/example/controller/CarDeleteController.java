@@ -23,15 +23,20 @@ public class CarDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Optional<Car> optionalCar = carService.findById(Long.parseLong(req.getParameter("carId")));
+
         if (optionalCar.isPresent()) {
+
             Car car = optionalCar.get();
             Long id = car.getId();
             Set<Park> parks = car.getParks();
+
             if (CollectionUtils.isNotEmpty(parks)) {
                 for (Park park : parks) {
                     Set<Car> cars1 = park.getCars();
+
                     if (CollectionUtils.isNotEmpty(cars1)) {
                         cars1.removeIf(car1 -> car1.getId().equals(id));
+
                         parkService.update(park);
                     }
                 }

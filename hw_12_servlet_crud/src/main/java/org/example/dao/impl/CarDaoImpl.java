@@ -11,7 +11,8 @@ import java.util.Optional;
 
 public class CarDaoImpl implements CarDao {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-hibernate-mysql");
+    private final EntityManagerFactory emf = Persistence
+            .createEntityManagerFactory("jpa-hibernate-mysql");
     private final EntityManager entityManager = emf.createEntityManager();
 
     @Override

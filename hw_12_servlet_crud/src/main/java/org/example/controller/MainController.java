@@ -13,6 +13,7 @@ public class MainController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(200);
+
         try (PrintWriter printWriter = resp.getWriter()) {
             printWriter.write("<!DOCTYPE html>");
             printWriter.write("<html lang=\"en\">");

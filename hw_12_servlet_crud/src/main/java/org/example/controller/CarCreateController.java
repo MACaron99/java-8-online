@@ -19,6 +19,7 @@ public class CarCreateController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         resp.setStatus(200);
+
         try (PrintWriter printWriter = resp.getWriter()) {
             printWriter.write("<!DOCTYPE html>");
             printWriter.write("<html lang='en'>");
@@ -45,9 +46,12 @@ public class CarCreateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
         resp.setStatus(201);
+
         Map<String, String[]> parameterMap = req.getParameterMap();
+
         if (MapUtils.isNotEmpty(parameterMap)) {
             Car car = new Car();
+
             parameterMap.forEach((k, v) -> {
                 switch (k) {
                     case "carBrand" -> car.setCarBrand(v[0]);
@@ -55,6 +59,7 @@ public class CarCreateController extends HttpServlet {
                     case "carYear" -> car.setCarYear(Integer.parseInt(v[0]));
                 }
             });
+
             carService.create(car);
         }
         resp.sendRedirect("cars");

@@ -16,6 +16,7 @@ public class CarReviewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         resp.setStatus(200);
+
         try (PrintWriter printWriter = resp.getWriter()) {
             printWriter.write("<!DOCTYPE html>");
             printWriter.write("<html lang=\"en\">");
@@ -40,6 +41,7 @@ public class CarReviewController extends HttpServlet {
             printWriter.write("<a href=\"/hw_12_servlet_crud/cars-new\">New car</a>");
             printWriter.write("</td>");
             printWriter.write("</tr>");
+
             for (Car car : carService.findAll()) {
                 printWriter.write("<tr>");
                 printWriter.write("<td>");

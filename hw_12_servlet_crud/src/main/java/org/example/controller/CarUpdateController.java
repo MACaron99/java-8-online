@@ -20,9 +20,12 @@ public class CarUpdateController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Optional<Car> optionalCar = carService.findById(Long.parseLong(req.getParameter("carId")));
+
         if (optionalCar.isPresent()) {
             Car car = optionalCar.get();
+
             resp.setStatus(200);
+
             try(PrintWriter printWriter = resp.getWriter()) {
                 printWriter.write("<!DOCTYPE html>");
                 printWriter.write("<html lang='en'>");
@@ -32,12 +35,16 @@ public class CarUpdateController extends HttpServlet {
                 printWriter.write("</h1>");
                 printWriter.write("<form method='post' action='/hw_12_servlet_crud/cars-update'>");
                 printWriter.write("<label for='brand'>Car brand:</label><br>");
-                printWriter.write("<input type='text' id='brand' name='carBrand' value='" + car.getCarBrand() + "'/><br><br>");
+                printWriter.write("<input type='text' id='brand' name='carBrand' value='"
+                        + car.getCarBrand() + "'/><br><br>");
                 printWriter.write("<label for='model'>Car model:</label><br>");
-                printWriter.write("<input type='text' id='model' name='carModel' value='" + car.getCarModel() + "'/><br><br>");
+                printWriter.write("<input type='text' id='model' name='carModel' value='"
+                        + car.getCarModel() + "'/><br><br>");
                 printWriter.write("<label for='year'>Car year:</label><br>");
-                printWriter.write("<input type='text' id='year' name='carYear' value='" + car.getCarYear() + "'/><br><br>");
-                printWriter.write("<input type='hidden' id='id' name='carId' value='" + car.getId() + "'/>");
+                printWriter.write("<input type='text' id='year' name='carYear' value='"
+                        + car.getCarYear() + "'/><br><br>");
+                printWriter.write("<input type='hidden' id='id' name='carId' value='"
+                        + car.getId() + "'/>");
                 printWriter.write("<input type='submit' value='Update'/>");
                 printWriter.write("</form>");
                 printWriter.write("</body>");
@@ -53,8 +60,10 @@ public class CarUpdateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Map<String, String[]> parameterMap = req.getParameterMap();
+
         if (MapUtils.isNotEmpty(parameterMap)) {
             Car car = new Car();
+
             parameterMap.forEach((k, v) -> {
                 switch (k) {
                     case "carId" -> car.setId(Long.parseLong(v[0]));
