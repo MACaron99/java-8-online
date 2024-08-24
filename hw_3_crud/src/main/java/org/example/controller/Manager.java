@@ -43,6 +43,7 @@ public class Manager {
 
     private void crud(String position, BufferedReader reader) throws IOException {
         String id;
+
         switch (position) {
             case "1" -> {
                 System.out.println("Please enter car brand");
@@ -76,7 +77,12 @@ public class Manager {
             case "3" -> {
                 System.out.println("Please enter id if you want to update the car");
                 id = String.valueOf(reader.readLine());
-                carMechanic.findOne(id);
+                Car car = carMechanic.findById(id);
+
+                if (car == null) {
+                    System.out.println("Car not found");
+                    break;
+                }
 
                 System.out.println("Please enter car brand");
                 String brand = reader.readLine();
@@ -87,15 +93,20 @@ public class Manager {
                 System.out.println("Please enter car mileage");
                 int mileage = Integer.parseInt(reader.readLine());
 
-                carMechanic.update(brand, model, mileage);
+                car.setCarBrand(brand);
+                car.setCarModel(model);
+                car.setCarMileage(mileage);
+
+                carMechanic.update(car);
                 System.out.println("Your car was successfully updated");
             }
             case "4" -> {
                 System.out.println("Please enter id if you want to delete the car");
                 id = String.valueOf(reader.readLine());
 
-                carMechanic.findOne(id);
-                carMechanic.delete();
+                Car car = carMechanic.findById(id);
+
+                carMechanic.delete(car);
                 System.out.println("Your car was successfully deleted");
             }
             case "5" -> {

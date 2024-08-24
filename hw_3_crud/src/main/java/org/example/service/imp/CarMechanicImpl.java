@@ -19,17 +19,17 @@ public class CarMechanicImpl implements CarMechanic {
     }
 
     @Override
-    public void findOne(String id) {
-        carDb.findOne(id);
+    public Car findById(String id) {
+        return carDb.findById(id);
     }
 
     @Override
-    public void update(String brand, String model, int mileage) {
-        carDb.update(brand, model, mileage);
+    public void update(Car car) {
+        carDb.update(car);
     }
 
     @Override
-    public void delete() {
-        carDb.delete();
+    public void delete(Car car) {
+        carDb.delete(car);
     }
 }
