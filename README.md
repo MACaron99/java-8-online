@@ -53,9 +53,3 @@ This repository contains a collection of projects and assignments developed as p
 
 ### Module 3
 - **Description:** Developed a banking application simulator using MySQL and JDBC.
-
-## Getting Started
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/MACaron99/java-8-online
