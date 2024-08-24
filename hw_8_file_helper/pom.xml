@@ -5,39 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>hw9_file_crud</artifactId>
+    <artifactId>hw_8_file_helper</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
         <maven.shade.plugin.version>3.2.4</maven.shade.plugin.version>
-        <commons-lang3.version>3.13.0</commons-lang3.version>
-        <commons-io.version>2.13.0</commons-io.version>
-        <opencsv.version>2.4</opencsv.version>
-        <gson.version>2.10.1</gson.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>au.com.bytecode</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>${opencsv.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
-        </dependency>
-    </dependencies>
-
     <build>
-        <finalName>hw_9_file_crud</finalName>
+        <finalName>hw_8_file_helper</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
